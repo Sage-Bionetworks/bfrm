@@ -11,7 +11,7 @@ setMethod(
     
     args <- list(...)
     if(any(names(args) == ""))
-      stop("Optional arguments passed for sssSetup must be named")
+      stop("Optional arguments passed for paramSetup must be named")
     
     new("bfrmLinearModel",
         response = response,
@@ -31,7 +31,7 @@ setMethod(
 
     args <- list(...)
     if(any(names(args) == ""))
-      stop("Optional arguments passed for sssSetup must be named")
+      stop("Optional arguments passed for paramSetup must be named")
     
     new("sssBinaryModel",
         response = response,
@@ -42,16 +42,35 @@ setMethod(
 
 
 #####
+## CATEGORICAL MODEL
+#####
+setMethod(
+  f = "CategoricalModel",
+  signature = c("numeric", "data.frame"),
+  definition = function(response, data, ...){
+    
+    args <- list(...)
+    if(any(names(args) == ""))
+      stop("Optional arguments passed for paramSetup must be named")
+    
+    new("sssBinaryModel",
+        response = response,
+        data = data,
+        paramSpec = new("bfrmParam", ...))
+  }
+)
+
+#####
 ## SURVIVAL MODEL
 #####
 setMethod(
   f = "SurvivalModel",
-  signature = c("numeric", "numeric", "matrix"),
+  signature = c("numeric", "numeric", "data.frame"),
   definition = function(timeToEvent, censor, data, ...){
 
     args <- list(...)
     if(any(names(args) == ""))
-      stop("Optional arguments passed for sssSetup must be named")
+      stop("Optional arguments passed for paramSetup must be named")
     
     new("sssSurvivalModel",
         timeToEvent = timeToEvent,

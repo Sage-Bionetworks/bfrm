@@ -131,7 +131,7 @@ setClass(
   
   representation = representation(
     "VIRTUAL",
-    data = "matrix",
+    data = "data.frame",
     paramSpec = "bfrmParam")  
 )
 
