@@ -1,6 +1,6 @@
 Package: bfrm
 Type: Package
-Title: Bayesian Factor Regression Model (bfrm)
+Title: Bayesian Factor Regression Modelling (bfrm)
 Version: 0.1-1
 Date: 2012-02-21
 Author: Brian M. Bot (utilizing executables West group at Duke)
