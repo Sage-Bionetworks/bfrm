@@ -1,0 +1,5 @@
+README DOCUMENT FOR THE bfrm PACKAGE
+
+AUTHOR: BRIAN M. BOT
+
+Bayesian Factor Regression Model (bfrm) - wrappers written to integrate bfrm algorithm from West group as an R package to call platform-specific executables.
