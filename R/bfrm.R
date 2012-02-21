@@ -120,7 +120,7 @@ setMethod(
   definition = function(paramLoc){
     #    pathToExec <- file.path(path.package("bfrm"), "exec")
     pathToExec <- file.path("/Users/brian/workspace/gitRepos/bfrm/inst", "exec")
-    system(paste(file.path(pathToExec, "bfrm32.exe"), paramLoc, sep=" "))
+    system(paste(file.path(pathToExec, "bfrm.exe"), paramLoc, sep=" "))
   }
 )
 

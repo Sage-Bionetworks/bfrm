@@ -1,1 +1,5 @@
-inst/exec/
+inst/exec/bfrm
+inst/exec/bfrm32
+inst/exec/bfrm64
+inst/exec/bfrm.exe
+inst/exec/bfrm64.exe
