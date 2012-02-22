@@ -9,7 +9,7 @@ setMethod(
     
     theseFiles <- list(sub(".txt", "", list.files(outLoc), fixed=T))
     
-    outList <- lapply(theseFiles, fuction(x){
+    outList <- lapply(theseFiles, function(x){
       read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T)
     })
     

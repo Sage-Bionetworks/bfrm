@@ -15,7 +15,7 @@ setGeneric(
 #####
 setGeneric(
   name = ".bfrmPlatform",
-  def = function(setupLoc){
+  def = function(paramLoc){
     standardGeneric(".bfrmPlatform")
   }
 )
@@ -26,31 +26,31 @@ setGeneric(
 #####
 setGeneric(
   name = ".mac64bfrm",
-  def = function(setupLoc){
+  def = function(paramLoc){
     standardGeneric(".mac64bfrm")
   }
 )
 setGeneric(
   name = ".win64bfrm",
-  def = function(setupLoc){
+  def = function(paramLoc){
     standardGeneric(".win64bfrm")
   }
 )
 setGeneric(
   name = ".win32bfrm",
-  def = function(setupLoc){
+  def = function(paramLoc){
     standardGeneric(".win32bfrm")
   }
 )
 setGeneric(
   name = ".source64bfrm",
-  def = function(setupLoc){
+  def = function(paramLoc){
     standardGeneric(".source64bfrm")
   }
 )
 setGeneric(
   name = ".source32bfrm",
-  def = function(setupLoc){
+  def = function(paramLoc){
     standardGeneric(".source32bfrm")
   }
 )
@@ -74,9 +74,9 @@ setGeneric(
 )
 
 setGeneric(
-  name = ".readSummary",
-  def = function(object){
-    standardGeneric(".readSummary")
+  name = ".readResult",
+  def = function(object, outLoc){
+    standardGeneric(".readResult")
   }
 )
 

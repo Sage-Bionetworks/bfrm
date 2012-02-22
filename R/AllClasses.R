@@ -181,7 +181,7 @@ setValidity(
     if( any(is.na(object@response)) ){
       return("NAs not allowed in response vector")
     }
-    if( !all(sort(unique(object@response)) %in% c(0, 1)) ){
+    if( any(!(object@response %in% c(0, 1))) ){
       stop("response for binary must only contain values of 0 and 1")
     }
     
@@ -212,8 +212,8 @@ setValidity(
     if( any(is.na(object@censor)) ){
       return("NAs not allowed in censor vector")
     }
-    if( !all(sort(unique(object@censor)) %in% c(0, 1)) ){
-      return("censor must only contain values of 0 (censor) and 1 (event)")
+    if( any(!(object@censor %in% c(0, 2))) ){
+      return("censor must only contain values of 0 (observed) and 2 (censor)")
     }
     
     ## IF PASS ABOVE CHECKS THEN RETURN TRUE

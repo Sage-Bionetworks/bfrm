@@ -33,7 +33,7 @@ setMethod(
     if(any(names(args) == ""))
       stop("Optional arguments passed for paramSetup must be named")
     
-    new("sssBinaryModel",
+    new("bfrmBinaryModel",
         response = response,
         data = data,
         paramSpec = new("bfrmParam", ...))
@@ -53,7 +53,7 @@ setMethod(
     if(any(names(args) == ""))
       stop("Optional arguments passed for paramSetup must be named")
     
-    new("sssBinaryModel",
+    new("bfrmBinaryModel",
         response = response,
         data = data,
         paramSpec = new("bfrmParam", ...))
@@ -72,7 +72,7 @@ setMethod(
     if(any(names(args) == ""))
       stop("Optional arguments passed for paramSetup must be named")
     
-    new("sssSurvivalModel",
+    new("bfrmSurvivalModel",
         timeToEvent = timeToEvent,
         censor = censor,
         data = data,
@@ -83,7 +83,7 @@ setMethod(
 
 
 #####
-## SET A SHOW METHOD FOR GENERIC sssModel
+## SET A SHOW METHOD FOR GENERIC bfrmModel
 #####
 setMethod(
   f = "show",
