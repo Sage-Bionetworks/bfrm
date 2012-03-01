@@ -11,9 +11,9 @@ setMethod(
     args <- list(...)
     
     if(any(names(args) == ""))
-      stop("Optional arguments passed for sssSetup must be named")
+      stop("Optional arguments passed for bfrmSetup must be named")
     
-    paramSpec <- new("sssParam")
+    paramSpec <- new("bfrmParam")
     if( length(args) != 0L ){
       for( i in names(args) ){
         slot(paramSpec, i) <- args[[i]]
