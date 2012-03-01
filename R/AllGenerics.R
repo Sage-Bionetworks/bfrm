@@ -5,8 +5,14 @@
 
 setGeneric(
   name = "bfrm",
-  def = function(object){
+  def = function(formula, ...){
     standardGeneric("bfrm")
+  }
+)
+setGeneric(
+  name = ".bfrmWorker",
+  def = function(object){
+    standardGeneric(".bfrmWorker")
   }
 )
 
@@ -80,30 +86,22 @@ setGeneric(
   }
 )
 
+
+
+
 #####
-## CLASS CONSTRUCTORS
+## SET A SHOW METHOD FOR GENERIC bfrmModel
 #####
-setGeneric(
-  name = "LinearModel",
-  def = function(response, data, ...){
-    standardGeneric("LinearModel")
+setMethod(
+  f = "show",
+  signature = "bfrmModel",
+  definition = function(object){
+    cat('An object of class "', class(object), '"\n\n', sep="")
+    
+    these <- slotNames(object)
+    cat("Contains slots (class)\n")
+    cat("----------------------\n")
+    for(this in these)
+      cat("  ", this, " (", class(slot(object, this)), ")\n", sep="")
   }
-)
-setGeneric(
-  name = "BinaryModel",
-  def = function(response, data, ...){
-    standardGeneric("BinaryModel")
-  }
-)
-setGeneric(
-  name = "CategoricalModel",
-  def = function(response, data, ...){
-    standardGeneric("CategoricalModel")
-  }
-)
-setGeneric(
-  name = "SurvivalModel",
-  def = function(timeToEvent, censor, data, ...){
-    standardGeneric("SurvivalModel")
-  }
-)
+  )

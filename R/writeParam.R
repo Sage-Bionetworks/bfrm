@@ -11,7 +11,7 @@ setMethod(
       paste(x, " = ", slot(paramSpec, x), sep="")
     })
                       
-    fileLoc <- file.path(tempdir(), "parameter.txt")
+    fileLoc <- tempfile(pattern="parameter", tmpdir=tempdir(), fileext=".txt")
     write.table(thisOut, file=fileLoc, sep="\t", quote=F, row.names=F, col.names=F)
     
     return(fileLoc)

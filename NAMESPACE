@@ -1,0 +1,19 @@
+## IMPORT METHODS FROM STATS
+importFrom(stats, predict)
+
+## EXPORT MAIN bfrm FUNCTION
+exportMethods(
+  bfrm
+)
+
+## EXPORT CLASSES
+exportClasses(
+  bfrmModel,
+  bfrmLinearModel,
+  bfrmBinaryModel,
+  bfrmSurvivalModel,
+  bfrmResult,
+  bfrmLinearResult,
+  bfrmBinaryResult,
+  bfrmSurvivalResult
+)

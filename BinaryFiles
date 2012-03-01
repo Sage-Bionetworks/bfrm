@@ -1,5 +1,14 @@
+## BEFORE INSTALL
 inst/exec/bfrm
 inst/exec/bfrm32
 inst/exec/bfrm64
 inst/exec/bfrm.exe
 inst/exec/bfrm64.exe
+
+
+## AFTER INSTALL
+exec/bfrm
+exec/bfrm32
+exec/bfrm64
+exec/bfrm.exe
+exec/bfrm64.exe

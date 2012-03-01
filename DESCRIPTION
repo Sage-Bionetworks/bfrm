@@ -5,7 +5,7 @@ Version: 0.1-1
 Date: 2012-02-21
 Author: Brian M. Bot (utilizing executables West group at Duke)
 Maintainer: Brian M. Bot <brian.bot@sagebase.org>
-Depends: methods
+Depends: methods,survival
 Imports:
 Suggests:
 Description: wrappers written to integrate bfrm algorithm from West group as an R package to call platform-specific executable

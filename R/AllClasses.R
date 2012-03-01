@@ -8,116 +8,116 @@ setClass(
   Class = "bfrmParam",
   
   representation = representation(
-    NObservations = "numeric",
-    NVariables = "numeric",
-    NBinaryResponses = "numeric",
-    NCategoricalResponses = "numeric",
-    NSurvivalResponses = "numeric",
-    NContinuousResponses = "numeric",
-    NDesignVariables = "numeric",
-    NControlVariables = "numeric",
-    NLatentFactors = "numeric",
-    DataFile = "character",
-    HFile = "character",
-    ResponseMaskFile = "character",
-    XMaskFile = "character",
-    ShapeOfB = "numeric",
-    NonGaussianFactors = "numeric",
-    PriorPsia = "numeric",
-    PriorPsib = "numeric",
-    PriorSurvivalPsia = "numeric",
-    PriorSurvivalPsib = "numeric",
-    PriorRhoMean = "numeric",
-    PriorRhoN = "numeric",
-    PriorPiMean = "numeric",
-    PriorPiN = "numeric",
-    PriorTauDesigna = "numeric",
-    PriorTauDesignb = "numeric",
-    PriorTauResponseBinarya = "numeric",
-    PriorTauResponseBinaryb = "numeric",
-    PriorTauResponseCategoricala = "numeric",
-    PriorTauResponseCategoricalb = "numeric",
-    PriorTauResponseSurvivala = "numeric",
-    PriorTauResponseSurvivalb = "numeric",
-    PriorTauResponseContinuousa = "numeric",
-    PriorTauResponseContinuousb = "numeric",
-    PriorTauLatenta = "numeric",
-    PriorTauLatentb = "numeric",
-    PriorInterceptMean = "numeric",
-    PriorInterceptVar = "numeric",
-    PriorContinuousMean = "numeric",
-    PriorContinuousVar = "numeric",
-    PriorSurvivalMean = "numeric",
-    PriorSurvivalVar = "numeric",
-    Evol = "numeric",
-    EvolVarIn = "numeric",
-    EvolIncludeVariableThreshold = "numeric",
-    EvolIncludeFactorThreshold = "numeric",
-    EvolMiniumVariablesInFactor = "numeric",
-    EvolMaximumFactors = "numeric",
-    EvolMaximumVariables = "numeric",
-    EvolMaximumVariablesPerIteration = "numeric",
-    InclusionMethod = "numeric",
-    Burnin = "numeric",
-    nMCSamples = "numeric",
-    PrintIteration = "numeric",
-    PriorAlphaa = "numeric",
-    PriorAlphab = "numeric",
-    EvolVarInFile = "character"),
+    nobservations = "numeric",
+    nvariables = "numeric",
+    nbinaryresponses = "numeric",
+    ncategoricalresponses = "numeric",
+    nsurvivalresponses = "numeric",
+    ncontinuousresponses = "numeric",
+    ndesignvariables = "numeric",
+    ncontrolvariables = "numeric",
+    nlatentfactors = "numeric",
+    datafile = "character",
+    hfile = "character",
+    responsemaskfile = "character",
+    xmaskfile = "character",
+    shapeofb = "numeric",
+    nongaussianfactors = "numeric",
+    priorpsia = "numeric",
+    priorpsib = "numeric",
+    priorsurvivalpsia = "numeric",
+    priorsurvivalpsib = "numeric",
+    priorrhomean = "numeric",
+    priorrhon = "numeric",
+    priorpimean = "numeric",
+    priorpin = "numeric",
+    priortaudesigna = "numeric",
+    priortaudesignb = "numeric",
+    priortauresponsebinarya = "numeric",
+    priortauresponsebinaryb = "numeric",
+    priortauresponsecategoricala = "numeric",
+    priortauresponsecategoricalb = "numeric",
+    priortauresponsesurvivala = "numeric",
+    priortauresponsesurvivalb = "numeric",
+    priortauresponsecontinuousa = "numeric",
+    priortauresponsecontinuousb = "numeric",
+    priortaulatenta = "numeric",
+    priortaulatentb = "numeric",
+    priorinterceptmean = "numeric",
+    priorinterceptvar = "numeric",
+    priorcontinuousmean = "numeric",
+    priorcontinuousvar = "numeric",
+    priorsurvivalmean = "numeric",
+    priorsurvivalvar = "numeric",
+    evol = "numeric",
+    evolvarin = "numeric",
+    evolincludevariablethreshold = "numeric",
+    evolincludefactorthreshold = "numeric",
+    evolminiumvariablesinfactor = "numeric",
+    evolmaximumfactors = "numeric",
+    evolmaximumvariables = "numeric",
+    evolmaximumvariablesperiteration = "numeric",
+    inclusionmethod = "numeric",
+    burnin = "numeric",
+    nmcsamples = "numeric",
+    printiteration = "numeric",
+    prioralphaa = "numeric",
+    prioralphab = "numeric",
+    evolvarinfile = "character"),
   
   prototype = prototype(
-    NObservations = 0,
-    NVariables = 0,
-    NBinaryResponses = 0,
-    NCategoricalResponses = 0,
-    NSurvivalResponses = 0,
-    NContinuousResponses = 0,
-    NDesignVariables = 1,
-    NControlVariables = 0,
-    NLatentFactors = 0,
-    ShapeOfB = 2,
-    NonGaussianFactors = 1,
-    PriorPsia = 10,
-    PriorPsib = 2,
-    PriorSurvivalPsia = 2,
-    PriorSurvivalPsib = 0.5,
-    PriorRhoMean = 0.001,
-    PriorRhoN = 200,
-    PriorPiMean = 0.9,
-    PriorPiN = 10,
-    PriorTauDesigna = 5,
-    PriorTauDesignb = 1,
-    PriorTauResponseBinarya = 5,
-    PriorTauResponseBinaryb = 1,
-    PriorTauResponseCategoricala = 5,
-    PriorTauResponseCategoricalb = 1,
-    PriorTauResponseSurvivala = 5,
-    PriorTauResponseSurvivalb = 1,
-    PriorTauResponseContinuousa = 5,
-    PriorTauResponseContinuousb = 1,
-    PriorTauLatenta = 5,
-    PriorTauLatentb = 1,
-    PriorInterceptMean = 8,
-    PriorInterceptVar = 100,
-    PriorContinuousMean = 0,
-    PriorContinuousVar = 1,
-    PriorSurvivalMean = 2,
-    PriorSurvivalVar = 1,
-    Evol = 0,
-    EvolVarIn = 0,
-    EvolIncludeVariableThreshold = 0.75,
-    EvolIncludeFactorThreshold = 0.75,
-    EvolMiniumVariablesInFactor = 5,
-    EvolMaximumFactors = 5,
-    EvolMaximumVariables = 100,
-    EvolMaximumVariablesPerIteration = 5,
-    InclusionMethod = 1,
-    Burnin = 2000,
-    nMCSamples = 20000,
-    PrintIteration = 100,
-    PriorAlphaa = 1,
-    PriorAlphab = 1)
-)
+    nobservations = 0,
+    nvariables = 0,
+    nbinaryresponses = 0,
+    ncategoricalresponses = 0,
+    nsurvivalresponses = 0,
+    ncontinuousresponses = 0,
+    ndesignvariables = 1,
+    ncontrolvariables = 0,
+    nlatentfactors = 0,
+    shapeofb = 2,
+    nongaussianfactors = 1,
+    priorpsia = 10,
+    priorpsib = 2,
+    priorsurvivalpsia = 2,
+    priorsurvivalpsib = 0.5,
+    priorrhomean = 0.001,
+    priorrhon = 200,
+    priorpimean = 0.9,
+    priorpin = 10,
+    priortaudesigna = 5,
+    priortaudesignb = 1,
+    priortauresponsebinarya = 5,
+    priortauresponsebinaryb = 1,
+    priortauresponsecategoricala = 5,
+    priortauresponsecategoricalb = 1,
+    priortauresponsesurvivala = 5,
+    priortauresponsesurvivalb = 1,
+    priortauresponsecontinuousa = 5,
+    priortauresponsecontinuousb = 1,
+    priortaulatenta = 5,
+    priortaulatentb = 1,
+    priorinterceptmean = 8,
+    priorinterceptvar = 100,
+    priorcontinuousmean = 0,
+    priorcontinuousvar = 1,
+    priorsurvivalmean = 2,
+    priorsurvivalvar = 1,
+    evol = 0,
+    evolvarin = 0,
+    evolincludevariablethreshold = 0.75,
+    evolincludefactorthreshold = 0.75,
+    evolminiumvariablesinfactor = 5,
+    evolmaximumfactors = 5,
+    evolmaximumvariables = 100,
+    evolmaximumvariablesperiteration = 5,
+    inclusionmethod = 1,
+    burnin = 2000,
+    nmcsamples = 20000,
+    printiteration = 100,
+    prioralphaa = 1,
+    prioralphab = 1)
+  )
 
 ## VIRTUAL CLASS THAT WILL BE EXTENDED BY EACH MODEL TYPE
 
@@ -131,7 +131,8 @@ setClass(
   
   representation = representation(
     "VIRTUAL",
-    data = "data.frame",
+    call = "call",
+    data = "matrix",
     paramSpec = "bfrmParam")  
 )
 
@@ -212,8 +213,8 @@ setValidity(
     if( any(is.na(object@censor)) ){
       return("NAs not allowed in censor vector")
     }
-    if( any(!(object@censor %in% c(0, 2))) ){
-      return("censor must only contain values of 0 (observed) and 2 (censor)")
+    if( any(!(object@censor %in% c(0, 1))) ){
+      return("censor must only contain values of 0 (censor) and 1 (event)")
     }
     
     ## IF PASS ABOVE CHECKS THEN RETURN TRUE
@@ -227,7 +228,7 @@ setClass(
   contains = "bfrmModel",
   
   representation = representation(
-    response = "numeric")
+    response = "factor")
 )
 setValidity(
   "bfrmCategoricalModel",
@@ -247,12 +248,39 @@ setValidity(
 
 
 #####
-## MODEL RESULT CLASS
+## MODEL RESULT CLASSES
 #####
+
+## VIRTUAL CLASS THAT WILL BE EXTENDED BY EACH MODEL TYPE
 setClass(
   Class = "bfrmResult",
   
   representation = representation(
+    "VIRTUAL",
     bfrmModel = "bfrmModel",
-    output = "list")
+    bfrmOutput = "list")
+)
+
+setClass(
+  Class = "bfrmLinearResult",
+  contains = "bfrmResult",
+  
+  representation = representation(
+    bfrmModel = "bfrmLinearModel")
+)
+
+setClass(
+  Class = "bfrmBinaryResult",
+  contains = "bfrmResult",
+  
+  representation = representation(
+    bfrmModel = "bfrmBinaryModel")
+)
+
+setClass(
+  Class = "bfrmSurvivalResult",
+  contains = "bfrmResult",
+  
+  representation = representation(
+    bfrmModel = "bfrmSurvivalModel")
 )

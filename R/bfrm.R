@@ -1,25 +1,71 @@
-#' Bayesian Factor Regression Modelling (bfrm) main function call
-#'
-#' This function takes an object of a derived class of bfrmModel depending
-#' on the type of model being run (linear, binary, categorical, or survival).  This
-#' function populated necessary input information for the compiled binary
-#' to return results.
-#'
-#' @param object previously constructed object of class derived from \code{bfrmModel}
-#' @return an object derived from class bfrmResult dependent on the type of
-#'   model that was fit (linear, binary, categorical, survival)
-#' @export
-#' @examples
-#' NEED TO FILL IN EXAMPLES ONCE PACKAGE BUILT AND DATA DIRECTORY AVAILABLE
 setMethod(
   f = "bfrm",
+  signature = "formula",
+  definition = function(formula, ...){
+    
+    Call <- match.call()
+    
+    y <- eval(Call$formula[[2]])
+    x <- as.matrix(eval(Call$formula[[3]]))
+    
+    args <- list(...)
+    
+    if(any(names(args) == ""))
+      stop("Optional arguments passed for sssSetup must be named")
+    
+    paramSpec <- new("sssParam")
+    if( length(args) != 0L ){
+      for( i in names(args) ){
+        slot(paramSpec, i) <- args[[i]]
+      }
+    }
+    
+    
+    
+    if( !(class(y) %in% c("factor", "numeric", "Surv")) )
+      stop("Response must either be a numeric vector, a factor, or a Surv object")
+
+    if( class(y) == "Surv" ){
+      myObj <- new("bfrmSurvivalModel",
+                   call = Call,
+                   timeToEvent = y[, 1],
+                   censor = y[, 2],
+                   data = x,
+                   paramSpec = paramSpec)
+    } else if( class(y) == "factor" ){
+      myObj <- new("bfrmCategoricalModel",
+                   call = Call,
+                   response = y,
+                   data = x,
+                   paramSpec = paramSpec)
+    } else if( class(y) == "numeric"){
+      if( all(unique(y) %in% c(0, 1)) ){
+        myObj <- new("bfrmBinaryModel",
+                     call = Call,
+                     response = y,
+                     data = x,
+                     paramSpec = paramSpec)
+      } else{
+        myObj <- new("bfrmLinearModel",
+                     call = Call,
+                     response = y,
+                     data = x,
+                     paramSpec = paramSpec)
+      }
+    }
+    
+    
+    ## RUN THE WORKER THAT WRITES FILES AND RUNS BFRM BINARY
+    outSum <- .bfrmWorker(myObj)
+    return(outSum)
+  }
+)
+
+setMethod(
+  f = ".bfrmWorker",
   signature = "bfrmModel",
   definition = function(object){
     
-    ## FILL IN SETUP INFORMATION
-    object@paramSpec@NObservations <- ncol(object@data)
-    object@paramSpec@NVariables <- nrow(object@data)
-
     ## PASS ON TO DISPATCH METHOD DIFFERING BY MODEL TYPE TO FILL IN THE REST OF THE PARAMS
     object <- .writeData(object)
 
@@ -28,7 +74,7 @@ setMethod(
     
     ## SET UP A LOCATION FOR THE OUTPUT FILES TO BE STORED
     curWd <- getwd()
-    outLoc <- file.path(tempdir(), "output")
+    outLoc <- tempfile(pattern="output", tmpdir=tempdir(), fileext="")
     dir.create(outLoc)
     setwd(outLoc)
     
