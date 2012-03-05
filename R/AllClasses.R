@@ -66,6 +66,7 @@ setClass(
     evolvarinfile = "character"),
   
   prototype = prototype(
+    hfile = "NA",
     nobservations = 0,
     nvariables = 0,
     nbinaryresponses = 0,
@@ -116,7 +117,8 @@ setClass(
     nmcsamples = 20000,
     printiteration = 100,
     prioralphaa = 1,
-    prioralphab = 1)
+    prioralphab = 1,
+    evolvarinfile = "NA")
   )
 
 ## VIRTUAL CLASS THAT WILL BE EXTENDED BY EACH MODEL TYPE

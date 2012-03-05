@@ -14,7 +14,12 @@ setMethod(
     tmpMask <- is.na(object@data)
     maskLoc <- tempfile(pattern="xmaskfile", tmpdir=tempdir(), fileext=".txt")
     write.table(tmpMask, file=maskLoc, sep="\t", quote=F, row.names=F, col.names=F)
+
+    tmpResp <- rep(0, length(object@response))
+    respLoc <- tempfile(pattern="responseMaskFile", tmpdir=tempdir(), fileext=".txt")
+    write.table(tmpResp, file=respLoc, sep="\t", quote=F, row.names=F, col.names=F)
     
+    object@paramSpec@responsemaskfile <- respLoc
     object@paramSpec@xmaskfile <- maskLoc
     object@paramSpec@datafile <- fileLoc
     object@paramSpec@ncontinuousresponses <- 1
@@ -38,6 +43,11 @@ setMethod(
     maskLoc <- tempfile(pattern="xmaskfile", tmpdir=tempdir(), fileext=".txt")
     write.table(tmpMask, file=maskLoc, sep="\t", quote=F, row.names=F, col.names=F)
     
+    tmpResp <- rep(0, length(object@response))
+    respLoc <- tempfile(pattern="responseMaskFile", tmpdir=tempdir(), fileext=".txt")
+    write.table(tmpResp, file=respLoc, sep="\t", quote=F, row.names=F, col.names=F)
+    
+    object@paramSpec@responsemaskfile <- respLoc
     object@paramSpec@xmaskfile <- maskLoc
     object@paramSpec@datafile <- fileLoc
     object@paramSpec@nbinaryresponses <- 1
@@ -61,6 +71,11 @@ setMethod(
     maskLoc <- tempfile(pattern="xmaskfile", tmpdir=tempdir(), fileext=".txt")
     write.table(tmpMask, file=maskLoc, sep="\t", quote=F, row.names=F, col.names=F)
     
+    tmpResp <- rep(0, length(object@response))
+    respLoc <- tempfile(pattern="responseMaskFile", tmpdir=tempdir(), fileext=".txt")
+    write.table(tmpResp, file=respLoc, sep="\t", quote=F, row.names=F, col.names=F)
+    
+    object@paramSpec@responsemaskfile <- respLoc
     object@paramSpec@xmaskfile <- maskLoc
     object@paramSpec@DataFile <- fileLoc
     object@paramSpec@ncategoricalresponses <- 1
@@ -95,7 +110,7 @@ setMethod(
     object@paramSpec@datafile <- fileLoc
     object@paramSpec@responsemaskfile <- cenLoc
     object@paramSpec@nsurvivalresponses <- 1
-    object@paramSpec@nlatentfactors <- 1
+#    object@paramSpec@nlatentfactors <- 1
     object@paramSpec@nobservations <- ncol(tmpMat)
     object@paramSpec@nvariables <- nrow(tmpMat)
     

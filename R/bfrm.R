@@ -82,7 +82,8 @@ setMethod(
     ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
     .bfrmPlatform(paramLoc)
     ## NOW THAT bfrm HAS BEEN CALLED, RETURN SUMMARY OF MODEL RUN
-    outSum <- .readResult(object, outLoc)
+#    outSum <- .readResult(object, outLoc)
+    outSum <- NULL
     #####
     
     setwd(curWd)
