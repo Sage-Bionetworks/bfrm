@@ -115,8 +115,9 @@ setMethod(
 #           mac.binary.leopardi386   = .mac32bfrm(paramLoc), ## DOES THIS EXIST?
            win.binaryx86_64         = .win64bfrm(paramLoc),
            win.binaryi386           = .win32bfrm(paramLoc),
-           sourcex86_64             = .source64bfrm(paramLoc),
-           sourcei386               = .source32bfrm(paramLoc),
+           source                   = .source64bfrm(paramLoc),
+#           sourcex86_64             = .source64bfrm(paramLoc),
+#           sourcei386               = .source32bfrm(paramLoc),
            stop("No bfrm executable available for this platform\nSee http://www.stat.duke.edu/research/software/west/bfrm/ for info on available platforms."))
   }
 )
