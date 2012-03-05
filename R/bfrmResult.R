@@ -7,15 +7,18 @@ setMethod(
   signature = c("bfrmModel", "character"),
   definition = function(object, outLoc){
     
-    theseFiles <- list(sub(".txt", "", list.files(outLoc), fixed=T))
+    theseFiles <- as.list(sub(".txt", "", list.files(outLoc, pattern=".txt"), fixed=T))
     
     outList <- lapply(theseFiles, function(x){
-      read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T)
+      obj <- read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T)
+      return(obj)
     })
     
-    newObj <- new("bfrmResult",
+    thisClass <- sub("Model", "Result", class(object))
+    
+    newObj <- new(thisClass,
                   bfrmModel = object,
-                  output = outList)
+                  bfrmOutput = outList)
     
     return(newObj)
   }

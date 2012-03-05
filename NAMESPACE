@@ -12,8 +12,10 @@ exportClasses(
   bfrmLinearModel,
   bfrmBinaryModel,
   bfrmSurvivalModel,
+  bfrmCategoricalModel,
   bfrmResult,
   bfrmLinearResult,
   bfrmBinaryResult,
-  bfrmSurvivalResult
+  bfrmSurvivalResult,
+  bfrmCategoricalResult
 )

@@ -286,3 +286,11 @@ setClass(
   representation = representation(
     bfrmModel = "bfrmSurvivalModel")
 )
+
+setClass(
+  Class = "bfrmCategoricalResult",
+  contains = "bfrmResult",
+  
+  representation = representation(
+    bfrmModel = "bfrmCategoricalModel")
+)
