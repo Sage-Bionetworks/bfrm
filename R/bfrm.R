@@ -133,8 +133,7 @@ setMethod(
   f = ".mac64bfrm",
   signature = c("character"),
   definition = function(paramLoc){
-    #    pathToExec <- file.path(path.package("bfrm"), "exec")
-    pathToExec <- file.path("/Users/brian/workspace/gitRepos/bfrm/inst", "exec")
+    pathToExec <- file.path(path.package("bfrm"), "exec")
     system(paste(file.path(pathToExec, "bfrm"), paramLoc, sep=" "))
   }
 )
@@ -149,8 +148,7 @@ setMethod(
   f = ".win64bfrm",
   signature = c("character"),
   definition = function(paramLoc){
-    #    pathToExec <- file.path(path.package("bfrm"), "exec")
-    pathToExec <- file.path("/Users/brian/workspace/gitRepos/bfrm/inst", "exec")
+    pathToExec <- file.path(path.package("bfrm"), "exec")
     system(paste(file.path(pathToExec, "bfrm64.exe"), paramLoc, sep=" "))
   }
 )
@@ -165,8 +163,7 @@ setMethod(
   f = ".win32bfrm",
   signature = c("character"),
   definition = function(paramLoc){
-    #    pathToExec <- file.path(path.package("bfrm"), "exec")
-    pathToExec <- file.path("/Users/brian/workspace/gitRepos/bfrm/inst", "exec")
+    pathToExec <- file.path(path.package("bfrm"), "exec")
     system(paste(file.path(pathToExec, "bfrm.exe"), paramLoc, sep=" "))
   }
 )
@@ -181,8 +178,7 @@ setMethod(
   f = ".source64bfrm",
   signature = c("character"),
   definition = function(paramLoc){
-    #    pathToExec <- file.path(path.package("bfrm"), "exec")
-    pathToExec <- file.path("/Users/brian/workspace/gitRepos/bfrm/inst", "exec")
+    pathToExec <- file.path(path.package("bfrm"), "exec")
     system(paste(file.path(pathToExec, "bfrm64"), paramLoc, sep=" "))
   }
 )
@@ -197,8 +193,7 @@ setMethod(
   f = ".source32bfrm",
   signature = c("character"),
   definition = function(paramLoc){
-    #    pathToExec <- file.path(path.package("bfrm"), "exec")
-    pathToExec <- file.path("/Users/brian/workspace/gitRepos/bfrm/inst", "exec")
+    pathToExec <- file.path(path.package("bfrm"), "exec")
     system(paste(file.path(pathToExec, "bfrm32"), paramLoc, sep=" "))
   }
 )
