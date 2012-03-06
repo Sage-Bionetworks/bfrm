@@ -54,7 +54,6 @@ setMethod(
       }
     }
     
-    
     ## RUN THE WORKER THAT WRITES FILES AND RUNS BFRM BINARY
     outSum <- .bfrmWorker(myObj)
     return(outSum)
@@ -80,10 +79,9 @@ setMethod(
     
     #####
     ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
-    .bfrmPlatform(paramLoc)
+    system(sprintf("%s %s", system.file(sprintf("/exec/%s/bfrm", Sys.getenv("R_ARCH")), package="bfrm"), paramLoc))
     ## NOW THAT bfrm HAS BEEN CALLED, RETURN SUMMARY OF MODEL RUN
     outSum <- .readResult(object, outLoc)
-#    outSum <- NULL
     #####
     
     setwd(curWd)
@@ -91,112 +89,4 @@ setMethod(
     return(outSum)
   }
 )
-
-
-#' bfrm platform specific triage
-#'
-#' Determines if there is a platform specific executable to be run for the user
-#'
-#' @param paramLoc the location on the local file system of the setup file necessary for
-#'   passing to bfrm executable.
-setMethod(
-  f = ".bfrmPlatform",
-  signature = "character",
-  definition = function(paramLoc){
-    
-    ## DEFINE WHICH BINARY TO RUN
-    ## myPlat IS ONE OF source, mac.binary.leopard, win.binary
-    myPlat <- .Platform$pkgType
-    ## FOR DIFFERENTIATION BETWEEN 32 AND 64 BIT OS
-    myArch <- .Platform$r_arch
-    mySwitch <- paste(myPlat, myArch, sep="")
-    
-    switch(mySwitch,
-           mac.binary.leopardx86_64 = .mac64bfrm(paramLoc),
-#           mac.binary.leopardi386   = .mac32bfrm(paramLoc), ## DOES THIS EXIST?
-           win.binaryx86_64         = .win64bfrm(paramLoc),
-           win.binaryi386           = .win32bfrm(paramLoc),
-           source                   = .source64bfrm(paramLoc),
-#           sourcex86_64             = .source64bfrm(paramLoc),
-#           sourcei386               = .source32bfrm(paramLoc),
-           stop("No bfrm executable available for this platform\nSee http://www.stat.duke.edu/research/software/west/bfrm/ for info on available platforms."))
-  }
-)
-
-
-#' Platform specific bfrm call
-#'
-#' Mac-specific executable
-#'
-#' @param paramLoc the location on the local file system of the setup file necessary for
-#'   passing to bfrm executable.
-setMethod(
-  f = ".mac64bfrm",
-  signature = c("character"),
-  definition = function(paramLoc){
-    pathToExec <- file.path(path.package("bfrm"), "exec")
-    system(paste(file.path(pathToExec, "bfrm"), paramLoc, sep=" "))
-  }
-)
-
-#' Platform specific bfrm call
-#'
-#' Windows 64-bit specific executable
-#'
-#' @param paramLoc the location on the local file system of the setup file necessary for
-#'   passing to bfrm executable.
-setMethod(
-  f = ".win64bfrm",
-  signature = c("character"),
-  definition = function(paramLoc){
-    pathToExec <- file.path(path.package("bfrm"), "exec")
-    system(paste(file.path(pathToExec, "bfrm64.exe"), paramLoc, sep=" "))
-  }
-)
-
-#' Platform specific bfrm call
-#'
-#' Windows 32-bit specific executable
-#'
-#' @param paramLoc the location on the local file system of the setup file necessary for
-#'   passing to bfrm executable.
-setMethod(
-  f = ".win32bfrm",
-  signature = c("character"),
-  definition = function(paramLoc){
-    pathToExec <- file.path(path.package("bfrm"), "exec")
-    system(paste(file.path(pathToExec, "bfrm.exe"), paramLoc, sep=" "))
-  }
-)
-
-#' Platform specific bfrm call
-#'
-#' Unix 64-bit specific executable
-#'
-#' @param paramLoc the location on the local file system of the setup file necessary for
-#'   passing to bfrm executable.
-setMethod(
-  f = ".source64bfrm",
-  signature = c("character"),
-  definition = function(paramLoc){
-    pathToExec <- file.path(path.package("bfrm"), "exec")
-    system(paste(file.path(pathToExec, "bfrm64"), paramLoc, sep=" "))
-  }
-)
-
-#' Platform specific bfrm call
-#'
-#' Unix 32-bit specific executable
-#'
-#' @param paramLoc the location on the local file system of the setup file necessary for
-#'   passing to bfrm executable.
-setMethod(
-  f = ".source32bfrm",
-  signature = c("character"),
-  definition = function(paramLoc){
-    pathToExec <- file.path(path.package("bfrm"), "exec")
-    system(paste(file.path(pathToExec, "bfrm32"), paramLoc, sep=" "))
-  }
-)
-
 

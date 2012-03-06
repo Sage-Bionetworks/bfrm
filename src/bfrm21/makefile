@@ -7,7 +7,7 @@ CXXFLAGS = -O3 -Wno-deprecated -DBFRM_LINUX
 bfrm_obj = mdp.o bfrmscreener.o bfrmevo.o newran.o extreal.o  Model.o util.o stat.o bfrmresult.o bfrmdata.o bfrmrawdata.o bfrmprior.o newmat1.o newmat2.o newmat3.o newmat4.o newmat5.o newmat6.o newmat7.o newmat8.o newmat9.o newmatex.o bandmat.o submat.o myexcept.o cholesky.o evalue.o hholder.o jacobi.o sort.o svd.o newmatrm.o bfrm.o inversewishart.o
 
 bfrm:       	$(bfrm_obj)
-		$(CXX) $(CXXFLAGS) -static  -o $@ $(bfrm_obj) -L. -lm
+		$(CXX) $(CXXFLAGS)  -o $@ $(bfrm_obj) -L. -lm
 
 newran.o:      	newran.cpp include.h newran.h boolean.h myexcept.h extreal.h
 

@@ -1,0 +1,4 @@
+all: mylibs $(SHLIB)
+
+mylibs:
+	cd bfrm21; make bfrm; mkdir -p ../../inst/exec/$(R_ARCH); cp bfrm ../../inst/exec/$(R_ARCH)/ 
