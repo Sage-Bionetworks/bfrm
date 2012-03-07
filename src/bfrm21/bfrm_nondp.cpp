@@ -733,7 +733,7 @@ void Bfrm::SampleBij(int i, int j, double v, int design, double oddratio, double
 						newv  = 1e9;
 					}
 				#else
-					if (!_finite(newv)) {
+					if (!finite(newv)) {
 						newv  = 1e9;
 					}
 				#endif
