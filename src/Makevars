@@ -1,4 +1,4 @@
 all: mylibs $(SHLIB)
 
 mylibs:
-	cd bfrm21; autoreconf --force --install; ./configure; make; mkdir -p ../../inst/exec/$(R_ARCH); cp bfrm ../../inst/exec/$(R_ARCH)/ 
+	cd bfrm21; ./configure; make; mkdir -p ../../inst/exec/$(R_ARCH); cp bfrm ../../inst/exec/$(R_ARCH)/ 
