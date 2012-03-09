@@ -1,21 +1,26 @@
+useDynLib(bfrm)
 ## IMPORT METHODS FROM STATS
 importFrom(stats, predict)
+import(methods, survival)
+exportPattern("^[[:alpha:]]+")
+import( Rcpp )
 
 ## EXPORT MAIN bfrm FUNCTION
-exportMethods(
-  bfrm
-)
+#exportMethods(
+#  bfrm
+#)
+
 
 ## EXPORT CLASSES
-exportClasses(
-  bfrmModel,
-  bfrmLinearModel,
-  bfrmBinaryModel,
-  bfrmSurvivalModel,
-  bfrmCategoricalModel,
-  bfrmResult,
-  bfrmLinearResult,
-  bfrmBinaryResult,
-  bfrmSurvivalResult,
-  bfrmCategoricalResult
-)
+#exportClasses(
+#  bfrmModel,
+#  bfrmLinearModel,
+#  bfrmBinaryModel,
+#  bfrmSurvivalModel,
+#  bfrmCategoricalModel,
+#  bfrmResult,
+#  bfrmLinearResult,
+#  bfrmBinaryResult,
+#  bfrmSurvivalResult,
+#  bfrmCategoricalResult
+#)

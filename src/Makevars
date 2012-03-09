@@ -1,4 +1,7 @@
-all: mylibs $(SHLIB)
+PKG_CXXFLAGS = -I./bfrm21 -O3 -w -c -fmessage-length=0 -fPIC -shared
+PKG_LIBS = `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` ./bfrm21/.libs/libbfrm.a -lz -lstdc++
+
+all: $(SHLIB)
 
 mylibs:
-	cd bfrm21; ./configure; make; mkdir -p ../../inst/exec/$(R_ARCH); cp bfrm ../../inst/exec/$(R_ARCH)/ 
+	cd bfrm21; if [ "$(R_ARCH)" != '' ] ; then ./configure CXXFLAGS="$(CXX`FLAGS) -arch $(subst /,,$(R_ARCH))"; else ./configure; fi; make instal; 
