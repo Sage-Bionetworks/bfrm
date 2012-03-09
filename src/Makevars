@@ -4,4 +4,4 @@ PKG_LIBS = `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` ./bfrm21/.libs/libbfrm.
 all: mylibs $(SHLIB)
 
 mylibs:
-	cd bfrm21; if [ "$(R_ARCH)" != '' ] ; then ./configure CXXFLAGS="$(CXX`FLAGS) -arch $(subst /,,$(R_ARCH))"; else ./configure; fi; make instal; 
+	cd bfrm21; if [ "$(R_ARCH)" != '' ] ; then ./configure CXXFLAGS="$(CXX`FLAGS) -arch $(subst /,,$(R_ARCH))"; else ./configure; fi; make; 
