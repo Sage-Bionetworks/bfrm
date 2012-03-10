@@ -10,9 +10,46 @@ setMethod(
     theseFiles <- as.list(sub(".txt", "", list.files(outLoc, pattern=".txt"), fixed=T))
     
     outList <- lapply(theseFiles, function(x){
-      obj <- read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T)
+      obj <- as.matrix(read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T))
+      tmp <- colSums(is.na(obj))
+      obj <- obj[, !(tmp==dim(obj)[1])]
+      
+      if(x=="mA"){
+#        rownames(obj) ## y and x in that order
+#        colnames(obj)
+      } else if(x=="mF"){
+#        rownames(obj)
+        if(!is.null(colnames(object@data)))
+          colnames(obj) <- colnames(object@data)
+      } else if(x=="mPib"){
+#        rownames(obj)
+#        colnames(obj)
+      } else if(x=="mPostPib"){
+#        rownames(obj) ## y and x in that order
+#        colnames(obj) ## SAME AS mA
+      } else if(x=="m"){
+#        rownames(obj)
+#        colnames(obj) ## y and x in that order
+      } else if(x=="mTau"){
+#        rownames(obj)
+#        colnames(obj) ## SAME AS mA
+      } else if(x=="mVariablesIn"){ ## ONLY IN EVOLUTIONARY MODE
+#        rownames(obj)
+#        colnames(obj)
+      } else if(x=="mX"){
+        if(!is.null(rownames(object@data)))
+          rownames(obj) <- rownames(object@data)
+        if(!is.null(colnames(object@data)))
+          colnames(obj) <- colnames(object@data)
+      } else if(x=="mZ"){
+#        rownames(obj)
+        if(!is.null(colnames(object@response)))
+          colnames(obj) <- names(object@response)
+      }
+      
       return(obj)
     })
+    names(outList) <- theseFiles
     
     thisClass <- sub("Model", "Result", class(object))
     
@@ -21,24 +58,6 @@ setMethod(
                   bfrmOutput = outList)
     
     return(newObj)
-  }
-)
-
-
-#####
-## SET A SHOW METHOD FOR GENERIC bfrmModel
-#####
-setMethod(
-  f = "show",
-  signature = "bfrmResult",
-  definition = function(object){
-    cat('An object of class "', class(object), '"\n\n', sep="")
-    
-    these <- slotNames(object)
-    cat("Contains slots (class)\n")
-    cat("----------------------\n")
-    for(this in these)
-      cat("  ", this, " (", class(slot(object, this)), ")\n", sep="")
   }
 )
 

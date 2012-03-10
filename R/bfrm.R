@@ -1,3 +1,7 @@
+## MAIN BFRM CALL AND WORKER
+## INTEGRATES WITH C CODE LOSELY VIA RCPP
+#####
+
 setMethod(
   f = "bfrm",
   signature = "formula",
@@ -13,13 +17,19 @@ setMethod(
     if(any(names(args) == ""))
       stop("Optional arguments passed for bfrmSetup must be named")
     
+    if( any(names(args) == "control") ){
+      control <- args[["control"]]
+      args[["control"]] <- NULL
+    } else{
+      control <- matrix(nrow=0, ncol=0)
+    }
+    
     paramSpec <- new("bfrmParam")
     if( length(args) != 0L ){
       for( i in names(args) ){
         slot(paramSpec, i) <- args[[i]]
       }
     }
-    
     
     
     if( !(class(y) %in% c("factor", "numeric", "Surv")) )
@@ -31,12 +41,14 @@ setMethod(
                    timeToEvent = y[, 1],
                    censor = y[, 2],
                    data = x,
+                   control = control,
                    paramSpec = paramSpec)
     } else if( class(y) == "factor" ){
       myObj <- new("bfrmCategoricalModel",
                    call = Call,
                    response = y,
                    data = x,
+                   control = control,
                    paramSpec = paramSpec)
     } else if( class(y) == "numeric"){
       if( all(unique(y) %in% c(0, 1)) ){
@@ -44,12 +56,14 @@ setMethod(
                      call = Call,
                      response = y,
                      data = x,
+                     control = control,
                      paramSpec = paramSpec)
       } else{
         myObj <- new("bfrmLinearModel",
                      call = Call,
                      response = y,
                      data = x,
+                     control = control,
                      paramSpec = paramSpec)
       }
     }
@@ -77,9 +91,16 @@ setMethod(
     dir.create(outLoc)
     setwd(outLoc)
     
-    #####
-    ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
-    system(sprintf("%s %s", system.file(sprintf("/exec/%s/bfrm", Sys.getenv("R_ARCH")), package="bfrm"), paramLoc))
+#     #####
+#     ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
+#     tmpArch <- Sys.getenv("R_ARCH")
+#     if(tmpArch=="")
+#       tmpArch <- "i386"
+#     system(sprintf("%s %s", system.file(sprintf("/exec/%s/bfrm", tmpArch), package="bfrm"), paramLoc))
+    
+    ## START EXPERIMENTING WITH RCCP MODEL CLASS
+    m <- new(Model)
+    m$Load(paramLoc)
     ## NOW THAT bfrm HAS BEEN CALLED, RETURN SUMMARY OF MODEL RUN
     outSum <- .readResult(object, outLoc)
     #####

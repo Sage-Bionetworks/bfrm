@@ -135,6 +135,7 @@ setClass(
     "VIRTUAL",
     call = "call",
     data = "matrix",
+    control = "matrix",
     paramSpec = "bfrmParam")  
 )
 
@@ -294,3 +295,88 @@ setClass(
   representation = representation(
     bfrmModel = "bfrmCategoricalModel")
 )
+
+
+
+#####
+## HERE ARE ALL OF THE SHOW METHODS
+#####
+
+## SET A SHOW METHOD FOR GENERIC bfrmModel
+setMethod(
+  f = "show",
+  signature = "bfrmResult",
+  definition = function(object){
+    cat('\nType of model fit: "', class(object@bfrmModel), '"\n\n', sep="")
+    
+#     cat("Call: ", deparse(object@bfrmModel@call), "\n", sep="")
+#     cat("Number of features searched : ", ncol(object@bfrmModel@data), "\n", sep="")
+#     cat("Number of training samples  : ", sum(object@bfrmModel@training==1), "\n", sep="")
+#     if( any(object@bfrmModel@training==0) ){
+#       cat("Number of testing samples   : ", sum(object@bfrmModel@training==0), "\n\n", sep="")
+#       cat("To access the predictions on the held-out testing dataset, call:\n")
+#       cat("  predict(object)\n", sep="")
+#       
+#       ## ADD OTHER INFO ABOUT THE PREDICTIONS
+#     } else{
+#       cat("To test this predictive model against a validation set, pass a new feature matrix to:\n")
+#       cat("  predict(object, newdata=newFeatureMatrix)\n", sep="")
+#     }
+    
+    these <- slotNames(object)
+    cat("\n----------------------\n")
+    cat("Contains slots (class)\n")
+    cat("----------------------\n")
+    for(this in these){
+      cat("  ", this, " (", class(slot(object, this)), ")\n", sep="")
+      if( class(slot(object,this)) == "list" ){
+        theseL <- names(slot(object, this))
+        for(thisL in theseL)
+          cat("      ", thisL, "\n", sep="")
+      }
+    }
+    
+  }
+)
+
+
+## SET A SHOW METHOD FOR GENERIC bfrmModel
+setMethod(
+  f = "show",
+  signature = "bfrmModel",
+  definition = function(object){
+    cat('An object of class "', class(object), '"\n\n', sep="")
+    
+    these <- slotNames(object)
+    cat("----------------------\n")
+    cat("Contains slots (class)\n")
+    cat("----------------------\n")
+    for(this in these){
+      cat("  ", this, " (", class(slot(object, this)), ")\n", sep="")
+      if( class(this) == "list" ){
+        theseL <- names(object)
+        for(thisL in theseL)
+          cat("    ", thisL, " (", class(slot(object, this)[[thisL]]), ")\n", sep="")
+      }
+    }
+  }
+)
+
+## SET A SHOW METHOD FOR GENERIC bfrmSetup
+setMethod(
+  f = "show",
+  signature = "bfrmParam",
+  definition = function(object){
+    cat('An object of class "', class(object), '"\n\n', sep="")
+    
+    these <- slotNames(object)
+    cat("---------------------------------\n")
+    cat("Contains parameter slots (values)\n")
+    cat("---------------------------------\n")
+    for(this in these){
+      cat("  ", this, " (", slot(object, this), ")\n", sep="")
+    }
+  }
+)
+
+

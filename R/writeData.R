@@ -26,6 +26,12 @@ setMethod(
     object@paramSpec@nobservations <- ncol(tmpMat)
     object@paramSpec@nvariables <- nrow(tmpMat)
     
+    if( length(object@control) > 0 ){
+      hLoc <- tempfile(pattern="hfile", tmpdir=tempdir(), fileext=".txt")
+      write.table(object@control, file=hLoc, sep="\t", quote=F, row.names=F, col.names=F)
+      object@paramSpec@hfile <- hLoc
+    }
+    
     return(object)
   }
 )
@@ -54,6 +60,12 @@ setMethod(
     object@paramSpec@nobservations <- ncol(tmpMat)
     object@paramSpec@nvariables <- nrow(tmpMat)
     
+    if( length(object@control) > 0 ){
+      hLoc <- tempfile(pattern="hfile", tmpdir=tempdir(), fileext=".txt")
+      write.table(object@control, file=hLoc, sep="\t", quote=F, row.names=F, col.names=F)
+      object@paramSpec@hfile <- hLoc
+    }
+    
     return(object)
   }
 )
@@ -81,6 +93,12 @@ setMethod(
     object@paramSpec@ncategoricalresponses <- 1
     object@paramSpec@nobservations <- ncol(tmpMat)
     object@paramSpec@nvariables <- nrow(tmpMat)
+    
+    if( length(object@control) > 0 ){
+      hLoc <- tempfile(pattern="hfile", tmpdir=tempdir(), fileext=".txt")
+      write.table(object@control, file=hLoc, sep="\t", quote=F, row.names=F, col.names=F)
+      object@paramSpec@hfile <- hLoc
+    }
     
     return(object)
   }
@@ -113,6 +131,14 @@ setMethod(
 #    object@paramSpec@nlatentfactors <- 1
     object@paramSpec@nobservations <- ncol(tmpMat)
     object@paramSpec@nvariables <- nrow(tmpMat)
+    
+    if( length(object@control) > 0 ){
+      tmpH <- cbind(1, object@control)
+      hLoc <- tempfile(pattern="hfile", tmpdir=tempdir(), fileext=".txt")
+      write.table(tmpH, file=hLoc, sep="\t", quote=F, row.names=F, col.names=F)
+      object@paramSpec@hfile <- hLoc
+      object@paramSpec@ncontrolvariables <- ncol(object@control)
+    }
     
     return(object)
   }
