@@ -8607,8 +8607,7 @@ m4_ifndef([_LT_PROG_F77],		[AC_DEFUN([_LT_PROG_F77])])
 m4_ifndef([_LT_PROG_FC],		[AC_DEFUN([_LT_PROG_FC])])
 m4_ifndef([_LT_PROG_CXX],		[AC_DEFUN([_LT_PROG_CXX])])
 
-# Copyright (C) 2002, 2003, 2005, 2006, 2007, 2008, 2011 Free Software
-# Foundation, Inc.
+# Copyright (C) 2002, 2003, 2005, 2006, 2007, 2008  Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
