@@ -10,7 +10,7 @@ setMethod(
     theseFiles <- as.list(sub(".txt", "", list.files(outLoc, pattern=".txt"), fixed=T))
     
     outList <- lapply(theseFiles, function(x){
-      obj <- as.matrix(read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T))
+      obj <- as.matrix(read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T, strip.white=T))
       tmp <- colSums(is.na(obj))
       obj <- obj[, !(tmp==dim(obj)[1])]
       
@@ -33,6 +33,9 @@ setMethod(
       } else if(x=="mTau"){
 #        rownames(obj)
 #        colnames(obj) ## SAME AS mA
+      } else if(x=="mPsi"){
+#        rownames(obj)
+#        colnames(obj) ## y and x in that order
       } else if(x=="mVariablesIn"){ ## ONLY IN EVOLUTIONARY MODE
 #        rownames(obj)
 #        colnames(obj)
