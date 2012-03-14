@@ -91,16 +91,13 @@ setMethod(
     dir.create(outLoc)
     setwd(outLoc)
     
-#     #####
-#     ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
-#     tmpArch <- Sys.getenv("R_ARCH")
-#     if(tmpArch=="")
-#       tmpArch <- "i386"
-#     system(sprintf("%s %s", system.file(sprintf("/exec/%s/bfrm", tmpArch), package="bfrm"), paramLoc))
+    #####
+    ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
+    tmpArch <- Sys.getenv("R_ARCH")
+    if(tmpArch=="")
+      tmpArch <- "i386"
+    system(sprintf("%s %s", system.file(sprintf("/exec/%s/bfrm", tmpArch), package="bfrm"), paramLoc))
     
-    ## START EXPERIMENTING WITH RCCP MODEL CLASS
-    m <- new(Model)
-    m$Load(paramLoc)
     ## NOW THAT bfrm HAS BEEN CALLED, RETURN SUMMARY OF MODEL RUN
     outSum <- .readResult(object, outLoc)
     #####
