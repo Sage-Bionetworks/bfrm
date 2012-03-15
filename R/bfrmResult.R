@@ -46,8 +46,8 @@ setMethod(
           colnames(obj) <- colnames(object@data)
       } else if(x=="mZ"){
 #        rownames(obj)
-        if(!is.null(colnames(object@response)))
-          colnames(obj) <- names(object@response)
+        if(!is.null(colnames(object@y)))
+          colnames(obj) <- colnames(object@y)
       }
       
       return(obj)

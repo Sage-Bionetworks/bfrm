@@ -36,13 +36,6 @@ setMethod(
       dir.create(outputDir)
     }
     
-    paramSpec <- new("bfrmParam")
-    if( length(args) != 0L ){
-      for( i in names(args) ){
-        slot(paramSpec, i) <- args[[i]]
-      }
-    }
-    
     ## DETERMINE IF THERE ARE RESPONSE MATRICES PASSES
     ## DETERMINE MISSINGNESS / CENSORING
     #####
@@ -73,17 +66,27 @@ setMethod(
         }
         
         y <- rbind(y, get(i))
-        slot(paramSpec, paste(sub("y", "n", i), "responses", sep="")) <- nrow(get(i))
         
-        if( i== "ysurvival" ){
-          rbind(ymask, ifelse(censor==0, 2, 0))
+        if( i == "ysurvival" ){
+          ymask <- rbind(ymask, ifelse(censor==0, 2, 0))
         } else{
-          rbind(ymask, ifelse(is.na(get(i)), 1, 0))
+          ymask <- rbind(ymask, ifelse(is.na(get(i)), 1, 0))
         }
       }
       
     }
     ## END OF SECTION DEFINING RESPONSES
+    
+    paramSpec <- new("bfrmParam")
+    if( length(args) != 0L ){
+      for( i in names(args) ){
+        slot(paramSpec, i) <- args[[i]]
+      }
+    }
+    
+    for( i in c("ybinary", "ycategorical", "ysurvival", "ycontinuous") ){
+      slot(paramSpec, paste(sub("y", "n", i), "responses", sep="")) <- nrow(get(i))
+    }
     
     myObj <- new("bfrmModel",
                  data = x,
