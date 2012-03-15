@@ -108,8 +108,10 @@ setMethod(
     #####
     ## RUN bfrm (ALL THAT IS NEEDED IS THE LOCATION OF THE PARAM FILE)
     tmpArch <- Sys.getenv("R_ARCH")
-    if(tmpArch=="")
+    tmpPlat <- .Platform$pkgType
+    if( tmpArch=="" & tmpPlat=="mac.binary.leopard" ){
       tmpArch <- "i386"
+    }
     system(sprintf("%s %s", system.file(sprintf("/exec/%s/bfrm", tmpArch), package="bfrm"), paramLoc))
     
     ## NOW THAT bfrm HAS BEEN CALLED, RETURN SUMMARY OF MODEL RUN
