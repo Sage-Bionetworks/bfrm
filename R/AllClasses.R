@@ -119,136 +119,37 @@ setClass(
     prioralphaa = 1,
     prioralphab = 1,
     evolvarinfile = "NA")
-  )
+)
 
-## VIRTUAL CLASS THAT WILL BE EXTENDED BY EACH MODEL TYPE
-
-
-#' ssModel virtual class and the classes that contain it
-#'
-#' @alias bfrmLinearModel,bfrmBinaryModel,bfrmSurvivalModel
-#' @exportClass
+## MODEL CLASS TO DISPATCH ON LATER
 setClass(
   Class = "bfrmModel",
   
   representation = representation(
-    "VIRTUAL",
-    call = "call",
     data = "matrix",
-    control = "matrix",
+    y = "matrix",
+    design = "matrix",
+    ymask = "matrix",
     paramSpec = "bfrmParam")  
 )
-
-#####
-## INDIVIDUAL MODEL TYPES EXTENDING bfrmModel
-#####
-
-## LINEAR MODEL
-setClass(
-  Class = "bfrmLinearModel",
-  contains = "bfrmModel",
-  
-  representation = representation(
-    response = "numeric")
-)
 setValidity(
-  "bfrmLinearModel",
+  "bfrmModel",
   function(object){
     
-    if( ncol(object@data) != length(object@response) ){
-      return("number of columns in data does not match number of values in response")
+    if( ncol(object@data) != ncol(object@y) ){
+      return("number of columns in data does not match number of values in y")
     }
-    if( any(is.na(object@response)) ){
-      return("NAs not allowed in response vector")
+    if( ncol(object@data) != ncol(object@design) ){
+      return("number of columns in data does not match number of values in design")
     }
-    
-    ## IF PASS ABOVE CHECKS THEN RETURN TRUE
-    return(TRUE)
-  }
-)
-
-## BINARY MODEL
-setClass(
-  Class = "bfrmBinaryModel",
-  contains = "bfrmModel",
-  
-  representation = representation(
-    response = "numeric")
-)
-setValidity(
-  "bfrmBinaryModel",
-  function(object){
-    
-    if( ncol(object@data) != length(object@response) ){
-      return("number of columns in data does not match number of values in response")
-    }
-    if( any(is.na(object@response)) ){
-      return("NAs not allowed in response vector")
-    }
-    if( any(!(object@response %in% c(0, 1))) ){
-      stop("response for binary must only contain values of 0 and 1")
-    }
-    
-    ## IF PASS ABOVE CHECKS THEN RETURN TRUE
-    return(TRUE)
-  }
-)
-
-## SURVIVAL MODEL
-setClass(
-  Class = "bfrmSurvivalModel",
-  contains = "bfrmModel",
-  
-  representation = representation(
-    timeToEvent = "numeric",
-    censor = "numeric")  
-)
-setValidity(
-  "bfrmSurvivalModel",
-  function(object){
-    
-    if( ncol(object@data) != length(object@censor) ){
+    if( ncol(object@data) != ncol(object@ymask) ){
       return("number of columns in data does not match number of values in censor")
     }
-    if( ncol(object@data) != length(object@timeToEvent) ){
-      return("number of columns in data does not match number of values in timeToEvent")
-    }
-    if( any(is.na(object@censor)) ){
-      return("NAs not allowed in censor vector")
-    }
-    if( any(!(object@censor %in% c(0, 1))) ){
-      return("censor must only contain values of 0 (censor) and 1 (event)")
-    }
     
     ## IF PASS ABOVE CHECKS THEN RETURN TRUE
     return(TRUE)
   }
 )
-
-## CATEGORICAL MODEL - NOT AS SURE ABOUT THIS ONE
-setClass(
-  Class = "bfrmCategoricalModel",
-  contains = "bfrmModel",
-  
-  representation = representation(
-    response = "factor")
-)
-setValidity(
-  "bfrmCategoricalModel",
-  function(object){
-    
-    if( ncol(object@data) != length(object@response) ){
-      return("number of columns in data does not match number of values in response")
-    }
-    if( any(is.na(object@response)) ){
-      return("NAs not allowed in response vector")
-    }
-    
-    ## IF PASS ABOVE CHECKS THEN RETURN TRUE
-    return(TRUE)
-  }
-)
-
 
 #####
 ## MODEL RESULT CLASSES
@@ -259,43 +160,9 @@ setClass(
   Class = "bfrmResult",
   
   representation = representation(
-    "VIRTUAL",
     bfrmModel = "bfrmModel",
     bfrmOutput = "list")
 )
-
-setClass(
-  Class = "bfrmLinearResult",
-  contains = "bfrmResult",
-  
-  representation = representation(
-    bfrmModel = "bfrmLinearModel")
-)
-
-setClass(
-  Class = "bfrmBinaryResult",
-  contains = "bfrmResult",
-  
-  representation = representation(
-    bfrmModel = "bfrmBinaryModel")
-)
-
-setClass(
-  Class = "bfrmSurvivalResult",
-  contains = "bfrmResult",
-  
-  representation = representation(
-    bfrmModel = "bfrmSurvivalModel")
-)
-
-setClass(
-  Class = "bfrmCategoricalResult",
-  contains = "bfrmResult",
-  
-  representation = representation(
-    bfrmModel = "bfrmCategoricalModel")
-)
-
 
 
 #####

@@ -1,23 +1,12 @@
-## IMPORT METHODS FROM STATS
-importFrom(stats, predict)
-import(methods, survival)
-
-## EXPORT MAIN bfrm FUNCTION
+## EXPORT MAIN bfrm METHOD AS WELL AS PROJECTION INTO A NEW DATASET
 exportMethods(
-  bfrm
+  bfrm,
+  projection
 )
 
 
 ## EXPORT CLASSES
 exportClasses(
   bfrmModel,
-  bfrmLinearModel,
-  bfrmBinaryModel,
-  bfrmSurvivalModel,
-  bfrmCategoricalModel,
-  bfrmResult,
-  bfrmLinearResult,
-  bfrmBinaryResult,
-  bfrmSurvivalResult,
-  bfrmCategoricalResult
+  bfrmResult
 )

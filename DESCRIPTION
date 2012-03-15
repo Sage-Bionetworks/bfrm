@@ -1,11 +1,11 @@
 Package: bfrm
 Type: Package
 Title: Bayesian Factor Regression Modelling (bfrm)
-Version: 0.1-2
+Version: 0.1-3
 Date: 2012-02-21
 Author: Brian M. Bot (utilizing executables West group at Duke)
 Maintainer: Brian M. Bot <brian.bot@sagebase.org>
-Imports: methods, survival, stats
+Imports: methods
 Description: wrappers written to integrate bfrm algorithm from West group as an R package to call platform-specific executable
 License: GPL-3
 URL: https://github.com/Sage-Bionetworks/bfrm, http://www.stat.duke.edu/research/software/west/bfrm/
