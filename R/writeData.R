@@ -21,9 +21,9 @@ setMethod(
       tmpH <- rbind(1, object@design)
       tmpH <- t(tmpH)
       hLoc <- tempfile(pattern="hfile", tmpdir=tempdir(), fileext=".txt")
-      write.table(object@design, file=hLoc, sep="\t", quote=F, row.names=F, col.names=F)
+      write.table(tmpH, file=hLoc, sep="\t", quote=F, row.names=F, col.names=F)
       object@paramSpec@hfile <- hLoc
-      object@paramSpec@ndesignvariables <- nrow(tmpH)
+      object@paramSpec@ndesignvariables <- ncol(tmpH)
     }
     
     if( length(object@ymask) > 0 ){

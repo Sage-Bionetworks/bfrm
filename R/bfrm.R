@@ -17,6 +17,9 @@ setMethod(
     if( any(names(args) == "design") ){
       design <- args[["design"]]
       args[["design"]] <- NULL
+      if( is.numeric(design) ){
+        design <- matrix(design, ncol=length(design))
+      }
     } else{
       design <- matrix(nrow=0, ncol=ncol(x))
     }
@@ -24,6 +27,9 @@ setMethod(
     if( any(names(args) == "censor") ){
       censor <- args[["censor"]]
       args[["censor"]] <- NULL
+      if( is.numeric(censor) ){
+        censor <- matrix(censor, ncol=length(censor))
+      }
     } else{
       censor <- matrix(nrow=0, ncol=ncol(x))
     }
@@ -123,48 +129,4 @@ setMethod(
     return(outSum)
   }
 )
-
-
-
-
-
-#####
-## CALLS TO GET BFRM INPUTS INTO CORRECT FORMAT
-#####
-# setMethod(
-#   f = "bfrm",
-#   signature = c("data.frame", "ANY", "ANY", "ANY", "ANY"),
-#   definition = function(data, ycontinuous, ybinary, ycategorical, ysurvival, ...){
-#     bfrm(as.matrix(data), ycontinuous, ybinary, ycategorical, ysurvival, ...)
-#   }
-# )
-# setMethod(
-#   f = "bfrm",
-#   signature = c("ANY", "numeric", "ANY", "ANY", "ANY"),
-#   definition = function(data, ycontinuous, ybinary, ycategorical, ysurvival, ...){
-#     bfrm(data, matrix(ycontinuous, ncol=length(ycontinuous)), ybinary, ycategorical, ysurvival, ...)
-#   }
-# )
-# setMethod(
-#   f = "bfrm",
-#   signature = c("ANY", "ANY", "numeric", "ANY", "ANY"),
-#   definition = function(data, ycontinuous, ybinary, ycategorical, ysurvival, ...){
-#     bfrm(data, ycontinuous, matrix(ybinary, ncol=length(ybinary)), ycategorical, ysurvival, ...)
-#   }
-# )
-# setMethod(
-#   f = "bfrm",
-#   signature = c("ANY", "ANY", "ANY", "numeric", "ANY"),
-#   definition = function(data, ycontinuous, ybinary, ycategorical, ysurvival, ...){
-#     bfrm(data, ycontinuous, ybinary, matrix(ycategorical, ncol=length(ycategorical)), ysurvival, ...)
-#   }
-# )
-# setMethod(
-#   f = "bfrm",
-#   signature = c("ANY", "ANY", "ANY", "ANY", "numeric"),
-#   definition = function(data, ycontinuous, ybinary, ycategorical, ysurvival, ...){
-#     bfrm(data, ycontinuous, ybinary, ycategorical, matrix(ysurvival, ncol=length(ysurvival)), ...)
-#   }
-# )
-
 
