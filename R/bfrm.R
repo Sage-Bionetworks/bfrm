@@ -11,6 +11,9 @@ setMethod(
     x <- data
     args <- list(...)
     
+    #####
+    ## ARGUMENT PARSING
+    #####
     if(any(names(args) == ""))
       stop("Optional arguments passed for bfrmSetup must be named")
     
@@ -81,8 +84,14 @@ setMethod(
       }
       
     }
+    #####
     ## END OF SECTION DEFINING RESPONSES
+    #####
     
+    
+    
+    
+    ## SET UP THE PARAMETERS FILE FOR PASS TO C++ EXECUTABLE
     paramSpec <- new("bfrmParam")
     if( length(args) != 0L ){
       for( i in names(args) ){
