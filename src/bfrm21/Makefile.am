@@ -1,7 +1,5 @@
-## By Ben Sauerwine
-## Yep, it's trivial.  Just enough to get automake working.
-## TO REPRODUCE ./configure:
-##  autoreconf --force --install
+## to reconfigure:  autoreconf -f -i
+
 bin_PROGRAMS = bfrm
 bfrm_SOURCES = bfrm.cpp
 bfrm_CXXFLAGS = $(AM_CXXFLAGS)
@@ -24,4 +22,6 @@ bandmat.cpp   bfrmresult.cpp    evalue.cpp   inversewishart.cpp  Model.cpp     n
 bfrm.cpp      bfrmscreener.cpp  extreal.cpp  jacobi.cpp          myexcept.cpp  newmat3.cpp  newmat7.cpp  newmatnl.cpp  sort.cpp      svd.cpp    \
 bfrmdata.cpp  bfrmprior.cpp    cholesky.cpp      fft.cpp      ltqnorm.cpp         newfft.cpp    newmat4.cpp  newmat8.cpp  newmatrm.cpp  stat.cpp      util.cpp   \
 bfrmevo.cpp   bfrmrawdata.cpp    hholder.cpp  mdp.cpp             newmat1.cpp   newmat5.cpp  newmat9.cpp  newran.cpp    stdafx.cpp
+
+
 

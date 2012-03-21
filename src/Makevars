@@ -4,4 +4,4 @@ PKG_LIBS = `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` ./bfrm21/.libs/libbfrm.
 all: mylibs $(SHLIB)
 
 mylibs:
-	cd bfrm21; if [ "$(R_ARCH)" != '' ] ; then ./configure --disable-shared CXXFLAGS="$(CXX`FLAGS) -arch $(subst /,,$(R_ARCH))"; else ./configure --disable-shared; fi; make; mkdir -p ../../inst/exec/$(R_ARCH); cp bfrm ../../inst/exec/$(R_ARCH)/; cp -R .libs ../../inst/exec/$(R_ARCH)
+	cd bfrm21; if [ "$(R_ARCH)" != '' ] ; then autoreconf -f -i; ./configure --disable-shared CXXFLAGS="$(CXX`FLAGS) -arch $(subst /,,$(R_ARCH))"; else autoreconf -f -i; ./configure --disable-shared; fi; make; mkdir -p ../../inst/exec/$(R_ARCH); cp bfrm ../../inst/exec/$(R_ARCH)/; cp -R .libs ../../inst/exec/$(R_ARCH)
