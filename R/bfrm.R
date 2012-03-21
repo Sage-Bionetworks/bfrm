@@ -27,6 +27,16 @@ setMethod(
       design <- matrix(nrow=0, ncol=ncol(x))
     }
 
+    if( any(names(args) == "control") ){
+      control <- args[["control"]]
+      args[["control"]] <- NULL
+      if( is.numeric(control) ){
+        control <- matrix(control, ncol=length(control))
+      }
+    } else{
+      control <- matrix(nrow=0, ncol=ncol(x))
+    }
+    
     if( any(names(args) == "censor") ){
       censor <- args[["censor"]]
       args[["censor"]] <- NULL
@@ -107,6 +117,7 @@ setMethod(
                  data = x,
                  y = y,
                  design = design,
+                 control = control,
                  ymask = ymask,
                  paramSpec = paramSpec)
     

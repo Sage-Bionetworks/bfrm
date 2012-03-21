@@ -129,6 +129,7 @@ setClass(
     data = "matrix",
     y = "matrix",
     design = "matrix",
+    control = "matrix",
     ymask = "matrix",
     paramSpec = "bfrmParam")  
 )
@@ -141,6 +142,9 @@ setValidity(
     }
     if( ncol(object@data) != ncol(object@design) ){
       return("number of columns in data does not match number of values in design")
+    }
+    if( ncol(object@data) != ncol(object@control) ){
+      return("number of columns in data does not match number of values in control")
     }
     if( ncol(object@data) != ncol(object@ymask) ){
       return("number of columns in data does not match number of values in censor")
