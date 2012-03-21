@@ -160,8 +160,8 @@ setClass(
   Class = "bfrmResult",
   
   representation = representation(
-    bfrmModel = "bfrmModel",
-    bfrmOutput = "list")
+    model = "bfrmModel",
+    results = "list")
 )
 
 

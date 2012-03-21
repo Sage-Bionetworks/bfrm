@@ -57,8 +57,8 @@ setMethod(
     thisClass <- sub("Model", "Result", class(object))
     
     newObj <- new(thisClass,
-                  bfrmModel = object,
-                  bfrmOutput = outList)
+                  model = object,
+                  results = outList)
     
     return(newObj)
   }
