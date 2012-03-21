@@ -174,7 +174,6 @@ setMethod(
   f = "show",
   signature = "bfrmResult",
   definition = function(object){
-    cat('\nType of model fit: "', class(object@bfrmModel), '"\n\n', sep="")
     
 #     cat("Call: ", deparse(object@bfrmModel@call), "\n", sep="")
 #     cat("Number of features searched : ", ncol(object@bfrmModel@data), "\n", sep="")
