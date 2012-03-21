@@ -114,7 +114,7 @@ setClass(
     evolmaximumvariablesperiteration = 5,
     inclusionmethod = 1,
     burnin = 2000,
-    nmcsamples = 20000,
+    nmcsamples = 5000,
     printiteration = 100,
     prioralphaa = 1,
     prioralphab = 1,
