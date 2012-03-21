@@ -20,7 +20,7 @@ setMethod(
     if( any(names(args) == "design") ){
       design <- args[["design"]]
       args[["design"]] <- NULL
-      if( is.numeric(design) ){
+      if( is.numeric(design) & !is.matrix(design) ){
         design <- matrix(design, ncol=length(design))
       }
     } else{
@@ -30,7 +30,7 @@ setMethod(
     if( any(names(args) == "control") ){
       control <- args[["control"]]
       args[["control"]] <- NULL
-      if( is.numeric(control) ){
+      if( is.numeric(control) & !is.matrix(control) ){
         control <- matrix(control, ncol=length(control))
       }
     } else{
