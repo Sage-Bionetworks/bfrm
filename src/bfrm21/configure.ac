@@ -97,9 +97,9 @@ export AR
 
 
 AC_PROG_MAKE_SET
-#AC_LIBTOOL_DLOPEN
-#AC_PROG_LIBTOOL
-LT_INIT([disable-shared])
+AC_LIBTOOL_DLOPEN
+AC_PROG_LIBTOOL
+#LT_INIT([disable-shared])
 AC_PROG_RANLIB
 
 dnl Post processing to patch up some deficiencies in libtool
