@@ -98,6 +98,7 @@ export AR
 AC_PROG_MAKE_SET
 #AC_LIBTOOL_DLOPEN
 #AC_PROG_LIBTOOL
+AC_PROG_RANLIB
 
 dnl Post processing to patch up some deficiencies in libtool
 case $host_os in
