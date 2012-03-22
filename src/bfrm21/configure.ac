@@ -96,8 +96,8 @@ dnl correctly.
 export AR
 
 AC_PROG_MAKE_SET
-AC_LIBTOOL_DLOPEN
-AC_PROG_LIBTOOL
+#AC_LIBTOOL_DLOPEN
+#AC_PROG_LIBTOOL
 
 dnl Post processing to patch up some deficiencies in libtool
 case $host_os in
