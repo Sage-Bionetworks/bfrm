@@ -9,6 +9,12 @@ setGeneric(
     standardGeneric("bfrm")
   }
 )
+setGeneric(
+  name = "evolve",
+  def = function(data, ...){
+    standardGeneric("evolve")
+  }
+)
 
 setGeneric(
   name = "projection",

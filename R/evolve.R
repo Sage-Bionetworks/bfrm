@@ -1,10 +1,10 @@
-## MAIN BFRM CALL AND WORKER
+## SPECIAL CASE OF BFRM IN WHICH EVOLUTIONARY MODE IS ENABLED
 ## INTEGRATES WITH COMPILED C++ CODE VIA EXECUTABLE CALL
 #####
 
 
 setMethod(
-  f = "bfrm",
+  f = "evolve",
   signature = "matrix",
   definition = function(data, ...){
     
@@ -26,7 +26,7 @@ setMethod(
     } else{
       design <- matrix(nrow=0, ncol=ncol(x))
     }
-
+    
     if( any(names(args) == "control") ){
       control <- args[["control"]]
       args[["control"]] <- NULL

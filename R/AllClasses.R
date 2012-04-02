@@ -156,10 +156,8 @@ setValidity(
 )
 
 #####
-## MODEL RESULT CLASSES
+## MODEL RESULT CLASS
 #####
-
-## VIRTUAL CLASS THAT WILL BE EXTENDED BY EACH MODEL TYPE
 setClass(
   Class = "bfrmResult",
   
@@ -232,7 +230,7 @@ setMethod(
   }
 )
 
-## SET A SHOW METHOD FOR GENERIC bfrmSetup
+## SET A SHOW METHOD FOR GENERIC bfrmParam
 setMethod(
   f = "show",
   signature = "bfrmParam",
