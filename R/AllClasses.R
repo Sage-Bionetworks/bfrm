@@ -155,6 +155,14 @@ setValidity(
   }
 )
 
+setClass(
+  Class = "evolveModel",
+  contains = "bfrmModel",
+  
+  representation = representation(
+    evolveSpecs = "list")
+)
+
 #####
 ## MODEL RESULT CLASS
 #####

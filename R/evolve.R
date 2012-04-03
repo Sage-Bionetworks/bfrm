@@ -3,6 +3,8 @@
 #####
 
 
+## init, varThreshold, factThreshold
+
 setMethod(
   f = "evolve",
   signature = "matrix",
@@ -10,6 +12,7 @@ setMethod(
     
     x <- data
     args <- list(...)
+    eSpecs <- list()
     
     #####
     ## ARGUMENT PARSING
@@ -17,6 +20,45 @@ setMethod(
     if(any(names(args) == ""))
       stop("Optional arguments passed for bfrmParam must be named")
     
+    ## INIT
+    if( any(names(args) == "init") ){
+      init <- args[["init"]]
+      args[["init"]] <- NULL
+      if( length(init) > dim(x)[1] ){
+        stop("More init values than rows in data")
+      }
+      if( class(init) == "character" ){
+        if( any(!(init %in% rownames(x))) ){
+          stop("init contains value not included as a row in data")
+        }
+        init <- which(rownames(x) %in% init)
+      } else{
+        if( class(init) != "numeric" ){
+          stop("init must either be indices or names rows of data")
+        } else{
+          if( any(init>nrow(x) | init<1) ){
+            stop(paste("init values not in the range of 0 to ", nrow(x), sep=""))
+          }
+        }
+      }
+    } else{
+      init <- 1
+    }
+    eSpecs$init <- init
+    
+    ## varThreshold AND factThreshold
+    if( any(names(args) == "varThreshold") ){
+      args[["evolincludevariablethreshold"]] <- args[["varThreshold"]]
+      args[["varThreshold"]] <- NULL
+    }
+    if( any(names(args) == "factThreshold") ){
+      args[["evolincludefactorthreshold"]] <- args[["factThreshold"]]
+      args[["factThreshold"]] <- NULL
+    }
+    
+    
+    
+    ## MORE GENERIC BFRM ARGUMENTS TO BE PASSED
     if( any(names(args) == "design") ){
       design <- args[["design"]]
       args[["design"]] <- NULL
@@ -103,6 +145,7 @@ setMethod(
     
     ## SET UP THE PARAMETERS FILE FOR PASS TO C++ EXECUTABLE
     paramSpec <- new("bfrmParam")
+    slot(paramSpec, "evol") <- 1
     if( length(args) != 0L ){
       for( i in names(args) ){
         slot(paramSpec, i) <- args[[i]]
@@ -119,6 +162,7 @@ setMethod(
                  design = design,
                  control = control,
                  ymask = ymask,
+                 evolveSpecs = eSpecs,
                  paramSpec = paramSpec)
     
     ## PASS ON TO DISPATCH METHOD DIFFERING BY MODEL TYPE TO FILL IN THE REST OF THE PARAMS
