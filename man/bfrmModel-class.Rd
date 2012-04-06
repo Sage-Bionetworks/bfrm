@@ -11,7 +11,7 @@
 }
 
 \section{Objects from the Class}{
-  Objects can be created by \code{bfrm} or \code{evolve} methods }.
+  Objects can be created by \code{bfrm} or \code{evolve} methods.
 }
 
 \section{Slots}{
