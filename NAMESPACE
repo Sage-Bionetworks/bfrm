@@ -9,5 +9,7 @@ exportMethods(
 ## EXPORT CLASSES
 exportClasses(
   bfrmModel,
-  bfrmResult
+  bfrmParam,
+  bfrmResult,
+  evolveModel
 )
