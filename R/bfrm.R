@@ -37,16 +37,6 @@ setMethod(
       control <- matrix(nrow=0, ncol=ncol(x))
     }
     
-    if( any(names(args) == "censor") ){
-      censor <- args[["censor"]]
-      args[["censor"]] <- NULL
-      if( is.numeric(censor) ){
-        censor <- matrix(censor, ncol=length(censor))
-      }
-    } else{
-      censor <- matrix(nrow=0, ncol=ncol(x))
-    }
-    
     if( any(names(args) == "outputDir") ){
       outputDir <- args[["outputDir"]]
       args[["outputDir"]] <- NULL
@@ -54,51 +44,6 @@ setMethod(
       outputDir <- tempfile(pattern="output", tmpdir=tempdir(), fileext="")
       dir.create(outputDir)
     }
-    
-    ## DETERMINE IF THERE ARE RESPONSE MATRICES PASSES
-    ## DETERMINE MISSINGNESS / CENSORING
-    #####
-    ## HACK IN GOOFY NOTATION FOR HOW BFRM SOURCE CODE EXPECTS CENSORED OBSERVATIONS
-    ## 0 IS OBSERVED - 1 IS MISSING (NON-OBSERVED) - AND 2 IS A CENSOR
-    y <- matrix(nrow=0, ncol=ncol(x))
-    ymask <- matrix(nrow=0, ncol=ncol(x))
-    for( i in c("ybinary", "ycategorical", "ysurvival", "ycontinuous") ){
-      
-      ## LOOK FOR Y VARS
-      if( any(names(args) == i) ){
-        assign(i, args[[i]])
-        args[[i]] <- NULL
-        if( is.numeric(get(i)) ){
-          assign(i, matrix(get(i), ncol=length(get(i))))
-        }
-      } else{
-        assign(i, matrix(nrow=0, ncol=ncol(x)))
-      }
-      
-      if( !is.matrix(get(i)) ){
-        stop(paste(i, "must be numeric vector or matrix"))
-      }
-      
-      if( length(get(i)) > 0 ){
-        if( ncol(get(i)) != ncol(data) ){
-          stop(paste("number of observations in data matrix not equal to number in", i))
-        }
-        
-        y <- rbind(y, get(i))
-        
-        if( i == "ysurvival" ){
-          ymask <- rbind(ymask, ifelse(censor==0, 2, 0))
-        } else{
-          ymask <- rbind(ymask, ifelse(is.na(get(i)), 1, 0))
-        }
-      }
-      
-    }
-    #####
-    ## END OF SECTION DEFINING RESPONSES
-    #####
-    
-    
     
     
     ## SET UP THE PARAMETERS FILE FOR PASS TO C++ EXECUTABLE
@@ -109,16 +54,10 @@ setMethod(
       }
     }
     
-    for( i in c("ybinary", "ycategorical", "ysurvival", "ycontinuous") ){
-      slot(paramSpec, paste(sub("y", "n", i), "responses", sep="")) <- nrow(get(i))
-    }
-    
     myObj <- new("bfrmModel",
                  data = x,
-                 y = y,
                  design = design,
                  control = control,
-                 ymask = ymask,
                  paramSpec = paramSpec)
     
     ## PASS ON TO DISPATCH METHOD DIFFERING BY MODEL TYPE TO FILL IN THE REST OF THE PARAMS

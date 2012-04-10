@@ -67,6 +67,7 @@ setClass(
   
   prototype = prototype(
     hfile = "NA",
+    responsemaskfile = "NA",
     nobservations = 0,
     nvariables = 0,
     nbinaryresponses = 0,
@@ -127,27 +128,19 @@ setClass(
   
   representation = representation(
     data = "matrix",
-    y = "matrix",
     design = "matrix",
     control = "matrix",
-    ymask = "matrix",
     paramSpec = "bfrmParam")  
 )
 setValidity(
   "bfrmModel",
   function(object){
     
-    if( ncol(object@data) != ncol(object@y) ){
-      return("number of columns in data does not match number of values in y")
-    }
     if( ncol(object@data) != ncol(object@design) ){
       return("number of columns in data does not match number of values in design")
     }
     if( ncol(object@data) != ncol(object@control) ){
       return("number of columns in data does not match number of values in control")
-    }
-    if( ncol(object@data) != ncol(object@ymask) ){
-      return("number of columns in data does not match number of values in censor")
     }
     
     ## IF PASS ABOVE CHECKS THEN RETURN TRUE

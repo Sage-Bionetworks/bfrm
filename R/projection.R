@@ -13,7 +13,6 @@ setMethod(
     if(odr | ndr){
       warning("rows not named in newdata or original data - must be in same order for projections to be accurate")
       pidNew <- 1:nrow(newdata)
-#      pidOrig <- 1:nrow(newdata)
       pidOrig <- 1:nrow(object@bfrmModel@data)
     } else{
       pidNew <- rownames(newdata)

@@ -4,9 +4,8 @@ setMethod(
   signature = "bfrmModel",
   definition = function(object){
     
-    tmpMat <- rbind(object@y, object@data)
     fileLoc <- tempfile(pattern="data", tmpdir=tempdir(), fileext=".txt")
-    write.table(tmpMat, file=fileLoc, sep="\t", quote=F, row.names=F, col.names=F)
+    write.table(object@data, file=fileLoc, sep="\t", quote=F, row.names=F, col.names=F)
     
     tmpMask <- ifelse(is.na(object@data), 1, 0)
     maskLoc <- tempfile(pattern="xmaskfile", tmpdir=tempdir(), fileext=".txt")
@@ -14,8 +13,8 @@ setMethod(
     
     object@paramSpec@xmaskfile <- maskLoc
     object@paramSpec@datafile <- fileLoc
-    object@paramSpec@nobservations <- ncol(tmpMat)
-    object@paramSpec@nvariables <- nrow(tmpMat)
+    object@paramSpec@nobservations <- ncol(object@data)
+    object@paramSpec@nvariables <- nrow(object@data)
     
     if( (length(object@design) + length(object@control)) > 0 ){
       tmpH <- rbind(1, object@design, object@control)
@@ -25,14 +24,6 @@ setMethod(
       object@paramSpec@hfile <- hLoc
       object@paramSpec@ndesignvariables <- nrow(object@design) + 1
       object@paramSpec@ncontrolvariables <- nrow(object@control)
-    }
-    
-    if( length(object@ymask) > 0 ){
-      cenLoc <- tempfile(pattern="responseMaskFile", tmpdir=tempdir(), fileext=".txt")
-      write.table(object@ymask, file=cenLoc, sep="\t", quote=F, row.names=F, col.names=F)
-      object@paramSpec@responsemaskfile <- cenLoc
-    } else{
-      object@paramSpec@responsemaskfile <- "NA"
     }
     
     return(object)

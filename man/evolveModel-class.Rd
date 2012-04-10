@@ -13,12 +13,10 @@ Objects can be created by calls of the form \code{new("evolveModel", ...)}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{evolveSpecs}:}{Object of class \code{"list"} ~~ }
     \item{\code{data}:}{Object of class \code{"matrix"} ~~ }
-    \item{\code{y}:}{Object of class \code{"matrix"} ~~ }
     \item{\code{design}:}{Object of class \code{"matrix"} ~~ }
     \item{\code{control}:}{Object of class \code{"matrix"} ~~ }
-    \item{\code{ymask}:}{Object of class \code{"matrix"} ~~ }
+    \item{\code{evolveSpecs}:}{Object of class \code{"list"} ~~ }
     \item{\code{paramSpec}:}{Object of class \code{"bfrmParam"} ~~ }
   }
 }

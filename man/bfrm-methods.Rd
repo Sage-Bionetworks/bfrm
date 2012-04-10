@@ -25,21 +25,6 @@
     \item{\code{control}}{
       control argument(s) to be passed to the bfrm algorithm (i.e. "assay artifact" variables)
     }
-    \item{\code{ybinary}}{
-      any binary responses to be considered in the bfrm algorithm
-    }
-    \item{\code{ycategorical}}{
-      any categorical responses to be considered in the bfrm algorithm
-    }
-    \item{\code{ycontinuous}}{
-      any continuous responses to be considered in the bfrm algorithm
-    }
-    \item{\code{ysurvival}}{
-      any time to event responses to be considered in the bfrm algorithm
-    }
-    \item{\code{censor}}{
-      censoring vector to be used with a passed time to event (ysurvival) argument - 0 for censor - 1 for event
-    }
     \item{\code{outputDir}}{
       directory for output text files to be stored - default is withing a temporary directory which will be deleted once the R session is terminated.
     }

@@ -17,10 +17,8 @@
 \section{Slots}{
   \describe{
     \item{\code{data}:}{Object of class \code{"matrix"} - numeric matrix with one row per predictor and one column per observation / sample / patient }
-    \item{\code{y}:}{Object of class \code{"matrix"} - numeric matrix which combines all response-type arguments passed to \code{bfrm} method into one matrix for pass to executable function call }
     \item{\code{design}:}{Object of class \code{"matrix"} - numeric matrix of design covariate(s) as passed to \code{bfrm} method }
     \item{\code{control}:}{Object of class \code{"matrix"} - numeric matrix of control covariate(s) as passed to \code{bfrm} method }
-    \item{\code{ymask}:}{Object of class \code{"matrix"} - numeric matrix specifying both missing observations in the response matrix as well as censored observations in the case of survival responses (in format that executable function expects - not necessarily intuitive ) }
     \item{\code{paramSpec}:}{Object of class \code{"bfrmParam"} an object specifying further optional parameters to be passed to the \code{bfrm} method call (see \code{bfrmParam} for further information) }
   }
 }
