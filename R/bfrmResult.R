@@ -5,12 +5,12 @@
 setMethod(
   f = ".readResult",
   signature = c("bfrmModel", "character"),
-  definition = function(object, outLoc){
+  definition = function(object, outputDir){
     
-    theseFiles <- as.list(sub(".txt", "", list.files(outLoc, pattern=".txt"), fixed=T))
+    theseFiles <- as.list(sub(".txt", "", list.files(outputDir, pattern=".txt"), fixed=T))
     
     outList <- lapply(theseFiles, function(x){
-      obj <- as.matrix(read.delim(file.path(outLoc, paste(x, ".txt", sep="")), header=F, as.is=T, strip.white=T))
+      obj <- as.matrix(read.delim(file.path(outputDir, paste(x, ".txt", sep="")), header=F, as.is=T, strip.white=T))
       tmp <- colSums(is.na(obj))
       obj <- obj[, !(tmp==dim(obj)[1])]
       
