@@ -1,5 +1,6 @@
 \name{projection-methods}
 \docType{methods}
+\alias{projection}
 \alias{projection-methods}
 \alias{projection,bfrmResult,matrix-method}
 \title{ ~~ Methods for Function \code{projection} in Package \pkg{bfrm} ~~}

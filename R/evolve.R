@@ -169,7 +169,7 @@ setMethod(
       }
     }
     
-    myObj <- new("bfrmModel",
+    myObj <- new("evolveModel",
                  data = x,
                  design = design,
                  control = control,
