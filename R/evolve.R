@@ -10,13 +10,24 @@ setMethod(
     
     x <- data
     args <- list(...)
-    eSpecs <- list()
+    
+    ## BY DEFINITION
+    args[["evol"]] <- 1
+    args[["nlatentfactors"]] <- 1
     
     #####
     ## ARGUMENT PARSING
     #####
     if(any(names(args) == ""))
       stop("Optional arguments passed for bfrmParam must be named")
+    
+    if( any(names(args) == "outputDir") ){
+      outputDir <- args[["outputDir"]]
+      args[["outputDir"]] <- NULL
+    } else{
+      outputDir <- tempfile(pattern="output", tmpdir=tempdir(), fileext="")
+      dir.create(outputDir)
+    }
     
     ## EVOLUTIONARY MODE SPECIFIC ARGUMENTS THAT ARE SUGGESTED
     if( any(names(args) == "init") ){
@@ -27,11 +38,11 @@ setMethod(
       }
       if( class(init) == "character" ){
         if( any(!(init %in% rownames(x))) ){
-          stop("init contains value not included as a row in data")
+          stop("init contains character value(s) not included as a rowname in data")
         }
         init <- which(rownames(x) %in% init)
       } else{
-        if( class(init) != "numeric" ){
+        if( !(class(init) %in% c("numeric", "integer")) ){
           stop("init must either be indices or names rows of data")
         } else{
           if( any(init>nrow(x) | init<1) ){
@@ -42,7 +53,10 @@ setMethod(
     } else{
       init <- 1
     }
-    eSpecs$init <- init
+    initLoc <- tempfile(pattern="varinfile", tmpdir=tempdir(), fileext=".txt")
+    write.table(init, file=initLoc, sep="\t", quote=F, row.names=F, col.names=F)
+    args[["evolvarinfile"]] <- initLoc
+    args[["evolvarin"]] <- length(init)
     
     if( any(names(args) == "varThreshold") ){
       if( !is.numeric(args[["varThreshold"]]) | length(args[["varThreshold"]]) != 1L ){
@@ -148,14 +162,6 @@ setMethod(
     } else{
       control <- matrix(nrow=0, ncol=ncol(x))
     }
-    
-    if( any(names(args) == "outputDir") ){
-      outputDir <- args[["outputDir"]]
-      args[["outputDir"]] <- NULL
-    } else{
-      outputDir <- tempfile(pattern="output", tmpdir=tempdir(), fileext="")
-      dir.create(outputDir)
-    }
     #####
     ## END OF ARGUMENT PARSING
     #####
@@ -169,11 +175,10 @@ setMethod(
       }
     }
     
-    myObj <- new("evolveModel",
+    myObj <- new("bfrmModel",
                  data = x,
                  design = design,
                  control = control,
-                 evolveSpecs = eSpecs,
                  paramSpec = paramSpec)
     
     ## PASS ON TO DISPATCH METHOD DIFFERING BY MODEL TYPE TO FILL IN THE REST OF THE PARAMS
