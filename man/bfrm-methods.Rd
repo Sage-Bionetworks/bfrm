@@ -25,6 +25,12 @@
     \item{\code{control}}{
       control argument(s) to be passed to the bfrm algorithm (i.e. "assay artifact" variables)
     }
+    \item{\code{burnin}}{
+      number of burn-in iterations in the MCMC -- default is 2000
+    }
+    \item{\code{nmcsamples}}{
+      number of MCMC iterations -- default is 5000
+    }
     \item{\code{outputDir}}{
       directory for output text files to be stored - default is withing a temporary directory which will be deleted once the R session is terminated.
     }

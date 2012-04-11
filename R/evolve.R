@@ -3,8 +3,6 @@
 #####
 
 
-## init, varThreshold, factThreshold
-
 setMethod(
   f = "evolve",
   signature = "matrix",
@@ -20,7 +18,7 @@ setMethod(
     if(any(names(args) == ""))
       stop("Optional arguments passed for bfrmParam must be named")
     
-    ## INIT
+    ## EVOLUTIONARY MODE SPECIFIC ARGUMENTS THAT ARE SUGGESTED
     if( any(names(args) == "init") ){
       init <- args[["init"]]
       args[["init"]] <- NULL
@@ -46,16 +44,88 @@ setMethod(
     }
     eSpecs$init <- init
     
-    ## varThreshold AND factThreshold
     if( any(names(args) == "varThreshold") ){
+      if( !is.numeric(args[["varThreshold"]]) | length(args[["varThreshold"]]) != 1L ){
+        stop("varThreshold must be numeric and between 0 and 1")
+      }
+      if( args[["varThreshold"]] < 0 | args[["varThreshold"]] > 1 ){
+        stop("varThreshold must be numeric and between 0 and 1")
+      }
+      
       args[["evolincludevariablethreshold"]] <- args[["varThreshold"]]
       args[["varThreshold"]] <- NULL
     }
-    if( any(names(args) == "factThreshold") ){
-      args[["evolincludefactorthreshold"]] <- args[["factThreshold"]]
-      args[["factThreshold"]] <- NULL
+    if( any(names(args) == "facThreshold") ){
+      if( !is.numeric(args[["facThreshold"]]) | length(args[["facThreshold"]]) != 1L ){
+        stop("facThreshold must be numeric and between 0 and 1")
+      }
+      if( args[["facThreshold"]] < 0 | args[["facThreshold"]] > 1 ){
+        stop("facThreshold must be numeric and between 0 and 1")
+      }
+      
+      args[["evolincludefactorthreshold"]] <- args[["facThreshold"]]
+      args[["facThreshold"]] <- NULL
     }
     
+    if( any(names(args) == "maxVarIter") ){
+      if( !is.numeric(args[["maxVarIter"]]) | length(args[["maxVarIter"]]) != 1L ){
+        stop("maxVarIter must be a single positive integer")
+      }
+      if( args[["maxVarIter"]] <= 0 ){
+        stop("maxVarIter must be a single positive integer")
+      }
+      
+      args[["evolmaximumvariablesperiteration"]] <- args[["maxVarIter"]]
+      args[["maxVarIter"]] <- NULL
+    }
+    
+    if( any(names(args) == "maxFacVars") ){
+      if( !is.numeric(args[["maxFacVars"]]) | length(args[["maxFacVars"]]) != 1L ){
+        stop("maxFacVars must be a single positive integer")
+      }
+      if( args[["maxFacVars"]] <= 0 ){
+        stop("maxFacVars must be a single positive integer")
+      }
+      
+      args[["evolmaximumvariablesperfactor"]] <- args[["maxFacVars"]]
+      args[["maxFacVars"]] <- NULL
+    }
+    
+    if( any(names(args) == "minFacVars") ){
+      if( !is.numeric(args[["minFacVars"]]) | length(args[["minFacVars"]]) != 1L ){
+        stop("minFacVars must be a single non-negative integer")
+      }
+      if( args[["minFacVars"]] < 0 ){
+        stop("minFacVars must be a single non-negative integer")
+      }
+      
+      args[["evolminimumvariablesperfactor"]] <- args[["minFacVars"]]
+      args[["minFacVars"]] <- NULL
+    }
+    
+    if( any(names(args) == "maxFacs") ){
+      if( !is.numeric(args[["maxFacs"]]) | length(args[["maxFacs"]]) != 1L ){
+        stop("maxFacs must be a single positive integer")
+      }
+      if( args[["maxFacs"]] < 0 ){
+        stop("maxFacs must be a single positive integer")
+      }
+      
+      args[["evolmaximumperfactors"]] <- args[["maxFacs"]]
+      args[["maxFacs"]] <- NULL
+    }
+    
+    if( any(names(args) == "maxVars") ){
+      if( !is.numeric(args[["maxVars"]]) | length(args[["maxVars"]]) != 1L ){
+        stop("maxVars must be a single positive integer")
+      }
+      if( args[["maxVars"]] < 0 ){
+        stop("maxVars must be a single positive integer")
+      }
+      
+      args[["evolmaximumvariables"]] <- args[["maxVars"]]
+      args[["maxVars"]] <- NULL
+    }
     
     
     ## MORE GENERIC BFRM ARGUMENTS TO BE PASSED
@@ -86,6 +156,9 @@ setMethod(
       outputDir <- tempfile(pattern="output", tmpdir=tempdir(), fileext="")
       dir.create(outputDir)
     }
+    #####
+    ## END OF ARGUMENT PARSING
+    #####
     
     ## SET UP THE PARAMETERS FILE FOR PASS TO C++ EXECUTABLE
     paramSpec <- new("bfrmParam")
