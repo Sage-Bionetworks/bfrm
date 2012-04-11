@@ -7,6 +7,11 @@ setMethod(
   signature = c("bfrmResult", "matrix"),
   definition = function(object, newdata){
     
+    ## CHECK TO SEE IF NECESSARY OUTPUT FILES ARE PRESENT IN RESULT OBJECT
+    if( !all(c("mVariablesIn", "mPostPib", "mA", "mPsi") %in% names(object@results)) ){
+      stop("Required")
+    }
+    
     ## CHECK IF EITHER SETS OF ROWNAMES ARE NULL - IF SO, MUST ASSUME ORDERED SAME
     odr <- is.null(rownames(object@model@data))
     ndr <- is.null(rownames(newdata))
