@@ -18,7 +18,7 @@ setGeneric(
 
 setGeneric(
   name = "projection",
-  def = function(object, newdata){
+  def = function(factors, newdata){
     standardGeneric("projection")
   }
 )
@@ -43,7 +43,7 @@ setGeneric(
 
 setGeneric(
   name = ".readResult",
-  def = function(object, outLoc){
+  def = function(object, outputDir){
     standardGeneric(".readResult")
   }
 )

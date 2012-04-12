@@ -3,16 +3,37 @@
 \alias{projection}
 \alias{projection-methods}
 \alias{projection,bfrmResult,matrix-method}
-\title{ ~~ Methods for Function \code{projection} in Package \pkg{bfrm} ~~}
-\description{
- ~~ Methods for function \code{projection} in package \pkg{bfrm} ~~
-}
-\section{Methods}{
-\describe{
 
-\item{\code{signature(object = "bfrmResult", newdata = "matrix")}}{
-%%  ~~describe this method here~~
+\title{ Projecting (\code{bfrm}-generated) factors into new data }
+
+\description{
+  Method to project a set of factors given my a result of \code{bfrm} into a new dataset
 }
-}}
+
+\section{Methods}{
+  \describe{
+    \item{\code{signature(factors = "bfrmResult", newdata = "matrix")}}{}
+    \item{\code{factors}}{
+      an object of class \code{bfrmResult} produced as output from a call to \code{bfrm}
+    }
+    \item{\code{newdata}}{
+      a numeric matrix that has rownames (feature names) either (1) including all feature names included in data that generated \code{factors}; or (2) ordered in precisely the same order as the data that generated \code{factors}
+    }
+  }
+}
+
+\section{Value}{
+  \describe{
+    Return value is of a numeric matrix of projections into \code{newdata}
+  }
+}
+
+\seealso{
+  \describe{
+    \item{model classes}{ \code{bfrmModel}, \code{evolveModel} }
+    \item{methods}{ \code{bfrm}, \code{evolve} }
+    \item{model results}{ \code{bfrmResult} }
+  }
+}
+
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }

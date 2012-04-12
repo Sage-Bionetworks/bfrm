@@ -11,7 +11,9 @@ setMethod(
     x <- data
     args <- list(...)
     
-    ## BY DEFINITION
+    #####
+    ## PARAMETERS FOR EVOLUTION BY DEFINITION
+    #####
     args[["evol"]] <- 1
     args[["nlatentfactors"]] <- 1
     
