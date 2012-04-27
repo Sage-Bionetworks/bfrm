@@ -115,7 +115,7 @@ setMethod(
         stop("minFacVars must be a single non-negative integer")
       }
       
-      args[["evolminimumvariablesperfactor"]] <- args[["minFacVars"]]
+      args[["evolminimumvariablesinfactor"]] <- args[["minFacVars"]]
       args[["minFacVars"]] <- NULL
     }
     
