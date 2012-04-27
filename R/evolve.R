@@ -127,7 +127,7 @@ setMethod(
         stop("maxFacs must be a single positive integer")
       }
       
-      args[["evolmaximumperfactors"]] <- args[["maxFacs"]]
+      args[["evolmaximumfactors"]] <- args[["maxFacs"]]
       args[["maxFacs"]] <- NULL
     }
     
